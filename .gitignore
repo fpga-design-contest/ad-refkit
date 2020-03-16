@@ -1,0 +1,6 @@
+zybo/vivado/prj/*
+
+*.jou
+*.log
+
+!.gitkeep
