@@ -1,0 +1,2 @@
+uenvcmd=fatload mmc 0 0x03000000 uImage && fatload mmc 0 0x02A00000 zynq-zybo-z7.dtb && bootm 0x03000000 - 0x02A00000
+ethaddr=02:50:10:70:11:A2
