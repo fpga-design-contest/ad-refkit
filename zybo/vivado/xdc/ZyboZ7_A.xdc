@@ -151,8 +151,7 @@ set_property -dict { PACKAGE_PIN Y17   IOSTANDARD LVCMOS33 } [get_ports { je10}]
 
 
 #MIPI
-set_property PACKAGE_PIN G20 [get_ports {cam_gpio_tri_io[0]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {cam_gpio_tri_io[0]}]
+set_property -dict {PACKAGE_PIN G20 IOSTANDARD LVCMOS33} [get_ports {cam_gpio_tri_io[0]}]
 set_property PULLUP true [get_ports {cam_gpio_tri_io[0]}]
 
 set_property -dict {PACKAGE_PIN F20 IOSTANDARD LVCMOS33} [get_ports cam_iic_scl_io]
