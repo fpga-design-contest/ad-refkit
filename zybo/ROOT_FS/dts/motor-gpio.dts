@@ -1,0 +1,26 @@
+/dts-v1/;/plugin/;
+/ {
+    fragment@0 {
+        target-path = "/amba";
+        __overlay__ {
+            #address-cells = <0x1>;
+            #size-cells = <0x1>;
+            motor_ctl_l_motor_ctl_motor_ctl_gpo: gpio@41210000 {
+                compatible = "generic-uio";
+                reg = <0x41210000 0x10000>;
+            };
+            motor_ctl_l_motor_ctl_rot_cnt_gpi: gpio@41200000 {
+                compatible = "generic-uio";
+                reg = <0x41200000 0x10000>;
+            };
+            motor_ctl_r_motor_ctl_motor_ctl_gpo: gpio@41230000 {
+                compatible = "generic-uio";
+                reg = <0x41230000 0x10000>;
+            };
+            motor_ctl_r_motor_ctl_rot_cnt_gpi: gpio@41220000 {
+                compatible = "generic-uio";
+                reg = <0x41220000 0x10000>;
+            };
+        };
+    };
+};
