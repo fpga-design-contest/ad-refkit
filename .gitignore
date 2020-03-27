@@ -1,6 +1,24 @@
 zybo/vivado/prj/*
 
+zybo/ROOT_FS/app/*/build/*
+
+zybo/ROOT_FS/driver/v4l2/build/*
+!zybo/ROOT_FS/driver/v4l2/build/Makefile
+
+zybo/ROOT_FS/dts/*.dtb
+
+zybo/ROOT_FS/lib/include/*
+zybo/ROOT_FS/lib/*.so
+zybo/ROOT_FS/lib/*/build/*
+zybo/ROOT_FS/lib/*/build/*
+
 *.jou
 *.log
+*.str
+*.o
+*.o.d
+*.o.cmd
+
+.ccls-cache
 
 !.gitkeep
