@@ -10,8 +10,8 @@ FPGAデザインコンテスト向けリファレンスキットのサンプル�
 
 ## Riquirements
 - ビルドに利用したホストPCの環境は以下の通りです
-    - Ubuntu18.04LTS
-    - Vivado2019.1.3
+    - Ubuntu 18.04 LTS
+    - Vivado 2019.1.3
         - MIPI CSI-2 RX Subsystem IPの利用が可能な有料ライセンスが必要です
 
 ## Directory structure
