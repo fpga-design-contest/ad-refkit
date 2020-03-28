@@ -15,6 +15,10 @@ using namespace std;
 using namespace cv;
 
 int main (int argc, char *argv[]) {
+    string impath;
+    cout << "Please input a path where you saved checkerboard images : ";
+    cin >> impath;
+
     int num_img;
     cout << "Please input the number of image : ";
     cin >> num_img;
@@ -32,11 +36,9 @@ int main (int argc, char *argv[]) {
     cin >> square_size;
 
     const Size BOARD_SIZE = Size(board_col, board_row);
-    const int  N_CORNERS  = board_col * board_row;
-
     vector<Mat> src_image(num_img);
     for(int i = 0;i < num_img;i++) {
-        src_image[i] = imread("img" + to_string(i) + ".png");
+        src_image[i] = imread(impath + "img" + to_string(i) + ".png");
     }
 
     vector<vector<Point2f>> imagePoints;
@@ -44,7 +46,7 @@ int main (int argc, char *argv[]) {
     Mat                     gray_image;
     Mat                     dst_image;
 
-    namedWindow("corner detect image");
+    namedWindow("corner");
     for(int i = 0; i < num_img; i++) {
         auto found = findChessboardCorners(src_image[i], BOARD_SIZE, imageCorners);
         cvtColor(src_image[i], gray_image, CV_BGR2GRAY);
