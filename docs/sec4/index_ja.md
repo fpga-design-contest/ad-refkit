@@ -44,6 +44,13 @@ root@ubuntu:# sed -i -e 's/#PermitRootLogin prohibit-password/PermitRootLogin ye
 root@ubuntu:# sed -i -e 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 root@ubuntu:# echo 'server <利用可能なNTPサーバ> iburst' >> /etc/ntp.conf # <利用可能なNTPサーバ>の例: ntp1.jst.mfeed.ad.jp
 root@ubuntu:# systemctl enable chrony
+root@ubuntu:# cat <<EOT > /etc/systemd/network/eth0.network
+              [Match]
+              Name=eth0
+              [Network]
+              DHCP=ipv4
+              EOT
+root@ubuntu:# systemctl enable systemd-networkd
 
 # install OpenCV 4.2.0
 root@ubuntu:# apt install -y \

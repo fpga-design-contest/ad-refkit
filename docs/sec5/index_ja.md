@@ -1,7 +1,11 @@
 ## アプリケーションの実行
-作成したSDカードをZYBO Z7-20に差し、電源投入後、SSHでrootログインします。\
-`zybo/ROOT_FS`下のファイルをSCPコマンド等でZYBOで動作するUbuntu上の`/root`下に転送してください。
+作成したSDカードをZYBO Z7-20に差し、電源投入後、SSHでrootログインします。
 
+``` sh
+$ ssh -X root@<ZYBOのIPアドレス>
+```
+
+`zybo/ROOT_FS`下のファイルをSCPコマンド等でZYBOで動作するUbuntu上の`/root`下に転送してください。\
 最初の一度だけパッケージのインストールを行う必要があります。
 
 ``` sh
