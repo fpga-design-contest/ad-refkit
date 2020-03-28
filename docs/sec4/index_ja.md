@@ -17,7 +17,7 @@ $ sudo gparted
 - 第2パーティション : ext4,  残りの全ての領域
 
 ### 2. rootfsの用意
-以下に示すコマンドを実行して下さい。\
+以下に示すコマンドを実行して下さい。
 
 ```
 # install Ubuntu 18.04 LTS and neessary packages

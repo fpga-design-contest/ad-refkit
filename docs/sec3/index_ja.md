@@ -7,7 +7,7 @@
 - 各種debパッケージ(headers, image, libc)
 
 これらはリポジトリ上に既に用意されています。\
-自分で用意する場合は以下に従ってください。
+新たに用意する場合は以下に従ってください。
 
 ``` sh
 $ apt install build-essential ccache bc bison flex ncurses-dev git

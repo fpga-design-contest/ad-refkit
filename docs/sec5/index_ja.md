@@ -1,11 +1,21 @@
 ## アプリケーションの実行
-`zybo/ROOT_FS`下のファイルをすべてSCPコマンド等でZYBOで動作するUbuntu上の`/root`下に転送してください。
+イーサネットケーブルを用意し、ZYBOのイーサネットポートに差し込みます。\
+ケーブルをホストPCと同一セグメントに存在するDHCP機能を持つルータに接続した後、
+作成したMicroSDカードをZYBO Z7-20にセットし、電源を投入してください。\
+UARTのシリアルコンソールからログインし、DHCPにより割り振られたIPアドレスを確認します。
+
+``` sh
+$ ip address show
+```
+
+IPアドレスが確認出来たら、
+`zybo/ROOT_FS`下のすべてのファイルをZYBOで動作するUbuntu上の`/root`下に転送してください。
 
 ``` sh
 $ scp -r <ROOT OF THIS REPOSITORY>/zybo/ROOT_FS/* root@<ZYBOのIPアドレス>:/root
 ```
 
-作成したSDカードをZYBO Z7-20に差し、電源投入後、SSHでrootログインします。
+SSHでrootログインします。
 
 ``` sh
 $ ssh -X root@<ZYBOのIPアドレス>
@@ -21,11 +31,13 @@ $ dpkg -i linux-libc-dev_4.19.0-xilinx-4_armhf.deb
 ```
 
 次に`init.sh`を実行して下さい。
-**ZYBOを起動する度**に実行する必要があります。
+これは**ZYBOを起動する度**に実行する必要があります。
 
 ``` sh
 $ sh init.sh
 ```
+
+以上でアプリケーションの実行が可能になります。
 
 ### ad-sample
 NOTE: 動作未確認
