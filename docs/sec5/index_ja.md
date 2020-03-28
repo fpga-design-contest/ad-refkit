@@ -1,11 +1,16 @@
 ## アプリケーションの実行
+`zybo/ROOT_FS`下のファイルをすべてSCPコマンド等でZYBOで動作するUbuntu上の`/root`下に転送してください。
+
+``` sh
+$ scp -r <ROOT OF THIS REPOSITORY>/zybo/ROOT_FS/* root@<ZYBOのIPアドレス>:/root
+```
+
 作成したSDカードをZYBO Z7-20に差し、電源投入後、SSHでrootログインします。
 
 ``` sh
 $ ssh -X root@<ZYBOのIPアドレス>
 ```
 
-`zybo/ROOT_FS`下のファイルをSCPコマンド等でZYBOで動作するUbuntu上の`/root`下に転送してください。\
 最初の一度だけパッケージのインストールを行う必要があります。
 
 ``` sh
@@ -15,7 +20,8 @@ $ dpkg -i linux-headers-4.19.0-xilinx_4.19.0-xilinx-4_armhf.deb
 $ dpkg -i linux-libc-dev_4.19.0-xilinx-4_armhf.deb
 ```
 
-また、ZYBOを起動する度に`init.sh`を実行して下さい。
+次に`init.sh`を実行して下さい。
+**ZYBOを起動する度**に実行する必要があります。
 
 ``` sh
 $ sh init.sh

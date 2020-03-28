@@ -18,7 +18,6 @@ $ sudo gparted
 
 ### 2. rootfsの用意
 以下に示すコマンドを実行して下さい。\
-OpenCVのビルドに時間がかかりますので注意して下さい。
 
 ```
 # install Ubuntu 18.04 LTS and neessary packages
@@ -79,7 +78,7 @@ root@ubuntu:# exit
 ```
 
 ### 3. bootfsの用意
-以下の5つのファイルをbootfs、つまり、第1パーティションに置きます。\
+以下の5つのファイルをbootfs、つまり、第1パーティションに置きます。
 
 - BOOT.bin
 - uEnv.txt
