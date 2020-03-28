@@ -32,6 +32,14 @@ void motor_test() {
 }
 
 int main() {
-    motor_test();
+    try {
+        motor_test();
+    }
+    catch(const std::exception& e) {
+        std::cout << e.what() << std::endl;
+    }
+    catch(...) {
+        std::cout << "An unexpected exception has occurred" << std::endl;
+    }
     return 0;
 }
