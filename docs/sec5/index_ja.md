@@ -4,7 +4,7 @@
 NOTE: 動作未確認
 
 ``` sh
-$ cd <root path of this repository>/zybo/ROOT_FS/app/pcam-test
+$ cd <ROOT OF THIS REPOSITORY>/zybo/ROOT_FS/app/pcam-test
 $ mkdir build && cd build
 $ cmake ..
 $ make
@@ -28,7 +28,7 @@ OpenCVを用いたカメラキャリブレーションを実行します。\
 画像データが用意できたらキャリブレーションを実行します。
 
 ``` sh
-$ cd <root path of this repository>/zybo/ROOT_FS/app/make-calibration-param
+$ cd <ROOT OF THIS REPOSITORY>/zybo/ROOT_FS/app/make-calibration-param
 $ mkdir build && cd build
 $ cmake ..
 $ make
@@ -55,7 +55,7 @@ $ python3 make-homography-params.py
 モータの動作を確認することが出来ます。
 
 ``` sh
-$ cd <root path of this repository>/zybo/ROOT_FS/app/motor-test
+$ cd <ROOT OF THIS REPOSITORY>/zybo/ROOT_FS/app/motor-test
 $ mkdir build && cd build
 $ cmake ..
 $ make
@@ -66,7 +66,7 @@ $ ./motor-test
 NOTE: 動作未確認
 
 ``` sh
-$ cd <root path of this repository>/zybo/ROOT_FS/app/pcam-test
+$ cd <ROOT OF THIS REPOSITORY>/zybo/ROOT_FS/app/pcam-test
 $ mkdir build && cd build
 $ cmake ..
 $ make
@@ -77,7 +77,7 @@ $ ./pcam-test
 NOTE: 動作未確認
 
 ``` sh
-$ cd <root path of this repository>/zybo/ROOT_FS/app/webcam-test
+$ cd <ROOT OF THIS REPOSITORY>/zybo/ROOT_FS/app/webcam-test
 $ mkdir build && cd build
 $ cmake ..
 $ make

@@ -2,7 +2,7 @@
 Block Designを生成するスクリプトを実行します。
 
 ``` sh
-$ cd <root path of this repository>/zybo/vivado/script
+$ cd <ROOT OF THIS REPOSITORY>/zybo/vivado/script
 $ sh setup_bd.sh
 ```
 
@@ -10,7 +10,7 @@ $ sh setup_bd.sh
 Bitstreamの生成が完了したら、FPGA Regionによる動的読み込みに対応するためにbitファイルをbinファイルに変換します。
 
 ``` sh
-$ cd <root path of this repository>/zybo/vivado/script
+$ cd <ROOT OF THIS REPOSITORY>/zybo/vivado/script
 $ sudo chmod u+x fpga-bit2bin.py
 $ sh create_bitstream_bin.sh
 ```

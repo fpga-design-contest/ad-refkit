@@ -20,7 +20,7 @@ $ sudo gparted
 以下に示すコマンドを実行して下さい。\
 OpenCVのビルドに時間がかかりますので注意して下さい。
 
-``` sh
+```
 # install Ubuntu 18.04 LTS and neessary packages
 $ sudo mount -o loop /dev/mmcblk0p2 /mnt
 $ sudo debootstrap --foreign --arch armhf bionic /mnt http://ports.ubuntu.com/
@@ -72,13 +72,15 @@ root@ubuntu:# exit
 ```
 
 ### 3. bootfsの用意
-以下の5つのファイルをbootfs、つまり、第1パーティションに置きます。
+以下の5つのファイルをbootfs、つまり、第1パーティションに置きます。\
 
 - BOOT.bin
 - uEnv.txt
 - uImage
 - uramdisk.image.gz
 - zynq-zybo-z7.dtb
+
+`zybo/BOOT_FS`に用意しているファイルをそのまま利用して問題ありません。
 
 #### 3.1 BOOT.bin
 以下に示す3つのファイルを用いて作成します。
@@ -93,7 +95,7 @@ root@ubuntu:# exit
 `BOOT.bin`は以下のコマンドで生成することが出来ます。
 
 ``` sh
-$ cd <root path of this repository>/zybo/BOOT_FS/bootbin_src
+$ cd <ROOT OF THIS REPOSITORY>/zybo/BOOT_FS/bootbin_src
 $ bootgen -arch zynq -image build.bif -w -o ../BOOT.bin
 ```
 
