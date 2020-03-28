@@ -142,12 +142,6 @@ set files [list \
 ]
 add_files -norecurse -fileset $obj $files
 
-# Import local files from the original project
-set files [list \
- [file normalize "${origin_dir}/../prj/ad_refkit/ad_refkit.srcs/sources_1/bd/design_1/hdl/design_1_wrapper.v" ]\
-]
-set imported_files [import_files -fileset sources_1 $files]
-
 # Set 'sources_1' fileset file properties for remote files
 set file "$origin_dir/../src/rtl/motor_ctrl/motor_ctrl.sv"
 set file [file normalize $file]
