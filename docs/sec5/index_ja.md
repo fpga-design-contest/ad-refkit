@@ -56,7 +56,7 @@ $ make
 $ ./make-calibration-param
 ```
 
-### make-homography-params
+### make-homography-param
 前方の路面の俯瞰画像を得る際に必要な射影変換行列を導出します。\
 はじめに、以下の手順に従って画像データを用意して下さい。
 
@@ -67,7 +67,7 @@ $ ./make-calibration-param
 画像データが用意できたらプログラムを実行します。
 
 ``` sh
-$ python3 make-homography-params.py
+$ python3 make-homography-param.py
 ```
 
 正方形の四隅をクリックし、倍率、オフセットを指定すると射影変換行列が出力されます。
