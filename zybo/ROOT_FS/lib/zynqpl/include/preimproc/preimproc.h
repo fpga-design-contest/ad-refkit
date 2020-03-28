@@ -33,13 +33,13 @@ namespace zynqpl {
         ~PreImProc();
 
         // 二値化しきい値を設定する
-        void SetGrayBinThreshold(uint8_t thr) const;
+        void setGrayBinThreshold(uint8_t thr) const;
 
         // 彩度しきい値を設定する
-        void SetSatBinThreshold(uint8_t thr) const;
+        void setSatBinThreshold(uint8_t thr) const;
 
         // ヒステリシスしきい値を設定する
-        void SetHistThreshold(uint8_t hthr, uint8_t lthr) const;
+        void setHistThreshold(uint8_t hthr, uint8_t lthr) const;
 
     private:
         int   preimproc_fd_;

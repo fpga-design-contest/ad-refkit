@@ -28,15 +28,15 @@ namespace zynqpl {
         munmap(preimproc_baseaddr_, PREIMPTOC_ALLOC_SIZE);
     }
 
-    void PreImProc::SetGrayBinThreshold(uint8_t thr) const {
+    void PreImProc::setGrayBinThreshold(uint8_t thr) const {
         REG(preimproc_baseaddr_, XPREIMPROC_PARAM_ADDR_GRAY_BIN_THR_DATA) = (uint32_t)(thr);
     }
 
-    void PreImProc::SetSatBinThreshold(uint8_t thr) const {
+    void PreImProc::setSatBinThreshold(uint8_t thr) const {
         REG(preimproc_baseaddr_, XPREIMPROC_PARAM_ADDR_SAT_BIN_THR_DATA) = (uint32_t)(thr);
     }
 
-    void PreImProc::SetHistThreshold(uint8_t hthr, uint8_t lthr) const {
+    void PreImProc::setHistThreshold(uint8_t hthr, uint8_t lthr) const {
         REG(preimproc_baseaddr_, XPREIMPROC_PARAM_ADDR_HIST_HTHR_DATA) = (uint32_t)(hthr);
         REG(preimproc_baseaddr_, XPREIMPROC_PARAM_ADDR_HIST_LTHR_DATA) = (uint32_t)(lthr);
     }
