@@ -78,9 +78,6 @@ root@ubuntu:# make install
 root@ubuntu:# pkg-config --modversion opencv4
 root@ubuntu:# cd ../../../ && rm -rf opencv_build
 
-# copy misc files from GitHub
-files from https://github.com/miyo/ad-refkit-sample/tree/develop/zybo/ROOT_FS
-
 root@ubuntu:# exit
 ```
 
