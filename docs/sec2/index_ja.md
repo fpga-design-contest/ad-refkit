@@ -1,3 +1,6 @@
+## Prepare
+get mipi-csi controller ip licence from https://japan.xilinx.com/products/intellectual-property/ef-di-mipi-csi-rx.html
+
 ## ビットストリームの生成
 Block Designを生成するスクリプトを実行します。
 

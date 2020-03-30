@@ -198,4 +198,6 @@ set_property -dict {PACKAGE_PIN L16 IOSTANDARD LVDS_25} [get_ports {dphy_data_hs
 
 
 
+set_false_path -from [get_clocks -of_objects [get_pins design_1_wrapper/design_1_i/ps_block/clk_wiz_0/inst/mmcm_adv_inst/CLKOUT1]] -to [get_clocks -of_objects [get_pins design_1_wrapper/design_1_i/ps_block/clk_wiz_0/inst/mmcm_adv_inst/CLKOUT0]]
+set_false_path -from [get_clocks -of_objects [get_pins design_1_wrapper/design_1_i/ps_block/clk_wiz_0/inst/mmcm_adv_inst/CLKOUT0]] -to [get_clocks -of_objects [get_pins design_1_wrapper/design_1_i/ps_block/clk_wiz_0/inst/mmcm_adv_inst/CLKOUT1]]
 

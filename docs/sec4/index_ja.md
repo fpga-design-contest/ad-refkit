@@ -21,7 +21,7 @@ $ sudo gparted
 
 ```
 # install Ubuntu 18.04 LTS and neessary packages
-$ sudo mount -o loop /dev/mmcblk0p2 /mnt
+$ sudo mount -o loop /dev/mmcblk0p2 /mnt # /dev/sdd1??
 $ sudo debootstrap --foreign --arch armhf bionic /mnt http://ports.ubuntu.com/
 $ sudo apt install qemu-user-static
 $ sudo cp /usr/bin/qemu-arm-static /mnt/usr/bin/
@@ -35,7 +35,10 @@ root@ubuntu:# add-apt-repository universe && apt update
 root@ubuntu:# adduser user
 root@ubuntu:# apt install locales ssh chrony libusb-1.0-0-dev
 root@ubuntu:# locale-gen en_US.UTF-8
+root@ubuntu:# apt install git
 root@ubuntu:# git clone -b v1.4.7 https://git.kernel.org/pub/scm/utils/dtc/dtc.git dtc && cd dtc
+root@ubuntu:# apt install build-essential
+root@ubuntu:# apt install flex bison
 root@ubuntu:# make && make HOME=/usr install-bin
 root@ubuntu:# cd .. && rm -rf dtc
 root@ubuntu:# sed -i -e 's/#PasswordAuthentication/PasswordAuthentication/g' /etc/ssh/sshd_config
@@ -74,6 +77,10 @@ root@ubuntu:# ccache make -j<適当なjob数>
 root@ubuntu:# make install
 root@ubuntu:# pkg-config --modversion opencv4
 root@ubuntu:# cd ../../../ && rm -rf opencv_build
+
+# copy misc files from GitHub
+files from https://github.com/miyo/ad-refkit-sample/tree/develop/zybo/ROOT_FS
+
 root@ubuntu:# exit
 ```
 
