@@ -21,6 +21,7 @@ enum class PreimprocMode {
 
 void pcam_test() {
 
+    std::cout << "pcam_test" << std::endl;
     double H[9] = {0.44493910474142623, -0.265170158024246, -23.667274634287185,
                    -0.010483730367221628, 0.03984000976025845, 44.47837644610684,
                    -3.556149627457038e-05, -0.0004076085446486301, 0.4412436729698192};
@@ -31,7 +32,7 @@ void pcam_test() {
     preimproc.setSatBinThreshold(50);
 
     zynqpl::Pcam pcam("pcam0",
-                      "i2c-4",
+                      "i2c-0",
                       zynqpl::OV5640_cfg::mode_t::MODE_720P_1280_720_60fps,
                       zynqpl::OV5640_cfg::awb_t::AWB_ADVANCED,
                       V4L2_PIX_FMT_GREY);

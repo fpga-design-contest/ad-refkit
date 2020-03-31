@@ -1,0 +1,15 @@
+/dts-v1/;/plugin/;
+/ {
+    fragment@0 {
+        target-path = "/amba";
+        __overlay__ {
+                i2c@e0004000 {
+                        status = "okay";
+                };
+
+                i2c@e0005000 {
+                        status = "okay";
+                };
+        };
+    };
+};

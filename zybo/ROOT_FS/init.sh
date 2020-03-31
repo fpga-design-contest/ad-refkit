@@ -1,6 +1,7 @@
 #!/bin/sh
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
 DTO_DIR=/sys/kernel/config/device-tree/overlays
+echo "SCRIPT_DIR:" $SCRIPT_DIR
 
 # カーネルモジュールのインストール
 lsmod | grep "v4l2"
@@ -35,6 +36,11 @@ cp $SCRIPT_DIR/dts/preimproc.dtb $DTO_DIR/preimproc/dtbo
 mkdir -p $DTO_DIR/v4l2
 dtc -I dts -O dtb -o $SCRIPT_DIR/dts/v4l2.dtb $SCRIPT_DIR/dts/v4l2.dts
 cp $SCRIPT_DIR/dts/v4l2.dtb $DTO_DIR/v4l2/dtbo
+
+## i2c
+mkdir -p $DTO_DIR/i2c
+dtc -I dts -O dtb -o $SCRIPT_DIR/dts/i2c.dtb $SCRIPT_DIR/dts/i2c.dts
+cp $SCRIPT_DIR/dts/i2c.dtb $DTO_DIR/i2c/dtbo
 
 # 共有ライブラリのbuild
 cd $SCRIPT_DIR/lib
