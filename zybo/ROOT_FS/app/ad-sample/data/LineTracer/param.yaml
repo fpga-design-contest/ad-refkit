@@ -1,0 +1,19 @@
+%YAML 1.2
+---
+Basis:
+   distance_from_line:      0.07  # m
+   vehicle_target_velocity: 0.10  # m/s
+   error_weight:            1.5
+   line_width:              0.025 # m
+   num_line_samp:           30    # 回数
+   k:                       0.7   # 評価関数に使用(コードを参照)
+   area_lthr:               0.005 # m^2
+   area_hthr:               0.030 # m^2
+   height_thr:              0.10  # m
+   cog_torelant_range:      0.30  # m
+   width_torelant_range:    0.10  # m
+
+PID:
+   P_gain: 0.5
+   I_gain: 0.0000005
+   D_gain: 0.000001
