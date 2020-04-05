@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-project(webcam-test)
+project(ad)
 
 set(CMAKE_CXX_STANDARD 14)
 
@@ -34,11 +34,16 @@ if(NOT OpenCV_FOUND)
   message(FATAL_ERROR "OpenCV > 4.0 not found.")
 endif()
 
+find_package(Threads REQUIRED)
+
 # 自作ライブラリへのパス
 set(LIBRARIES_DIR "${PROJECT_SOURCE_DIR}/../../lib")
 
 include_directories(
+  ${PROJECT_SOURCE_DIR}/include
   ${LIBRARIES_DIR}/include/improc
+  ${LIBRARIES_DIR}/include/zynqpl
+  ${LIBRARIES_DIR}/include/control
   ${OpenCV_INCLUDE_DIRS}
   )
 
@@ -46,15 +51,23 @@ link_directories(
   ${LIBRARIES_DIR}
   )
 
-
-# Build
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/build)
 
 add_executable(${PROJECT_NAME}
   src/main.cpp
+  src/ad/Handler.cpp
+  src/ad/WOCalculator/WOCalculator.cpp
+  src/ad/LineTracer/LineTracer.cpp
+  src/ad/HWController/MotorController/MotorController.cpp
+  src/ad/HWController/PcamController/PcamController.cpp
+  src/ad/HWController/PcamController/PcamImageCorrector/PcamImageCorrector.cpp
+  src/ad/HWController/WebcamController/WebcamController.cpp
   )
 
 target_link_libraries(${PROJECT_NAME}
   ${OpenCV_LIBS}
+  Threads::Threads
+  zynqpl
   improc
+  control
   )
