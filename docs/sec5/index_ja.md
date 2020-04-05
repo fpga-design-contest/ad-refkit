@@ -43,11 +43,12 @@ $ sh init.sh
 NOTE: 動作未確認
 
 ``` sh
-$ cd <ROOT OF THIS REPOSITORY>/zybo/ROOT_FS/app/pcam-test
+$ cd <ROOT OF THIS REPOSITORY>/zybo/ROOT_FS/app/ad-sample
+$ export AD_SAMPLE_ROOT=$(pwd)
 $ mkdir build && cd build
 $ cmake ..
 $ make
-$ ./pcam-test
+$ ./ad-sample
 ```
 
 ### make-calibration-param
