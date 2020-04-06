@@ -10,7 +10,7 @@
                 #interrupt-cells = <0x3>;
                 device-name="v4l2";
                 interrupt-parent = <4>;
-                interrupts = <0x0 0x59 0x4>;
+                interrupts = <0x0 0x1d 0x4>;
             };
         };
     };
