@@ -32,15 +32,15 @@ mkdir -p $DTO_DIR/preimproc
 dtc -I dts -O dtb -o $SCRIPT_DIR/dts/preimproc.dtb $SCRIPT_DIR/dts/preimproc.dts
 cp $SCRIPT_DIR/dts/preimproc.dtb $DTO_DIR/preimproc/dtbo
 
-## v4l2
-mkdir -p $DTO_DIR/v4l2
-dtc -I dts -O dtb -o $SCRIPT_DIR/dts/v4l2.dtb $SCRIPT_DIR/dts/v4l2.dts
-cp $SCRIPT_DIR/dts/v4l2.dtb $DTO_DIR/v4l2/dtbo
-
 ## i2c
 mkdir -p $DTO_DIR/i2c
 dtc -I dts -O dtb -o $SCRIPT_DIR/dts/i2c.dtb $SCRIPT_DIR/dts/i2c.dts
 cp $SCRIPT_DIR/dts/i2c.dtb $DTO_DIR/i2c/dtbo
+
+## v4l2
+mkdir -p $DTO_DIR/v4l2
+dtc -I dts -O dtb -o $SCRIPT_DIR/dts/v4l2.dtb $SCRIPT_DIR/dts/v4l2.dts
+cp $SCRIPT_DIR/dts/v4l2.dtb $DTO_DIR/v4l2/dtbo
 
 # 共有ライブラリのbuild
 cd $SCRIPT_DIR/lib
