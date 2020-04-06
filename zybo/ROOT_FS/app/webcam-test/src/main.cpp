@@ -12,22 +12,27 @@
 #include "main.h"
 
 void webcam_test() {
+    std::cout << "webcam_test()" << std::endl;
     cv::VideoCapture cap(0);
     if(!cap.isOpened()) {
         return;
     }
 
-    cap.set(CV_CAP_PROP_FRAME_WIDTH, 640);
-    cap.set(CV_CAP_PROP_FRAME_HEIGHT, 480);
+    //cap.set(cv::CV_CAP_PROP_FRAME_WIDTH, 640);
+    //cap.set(cv::CV_CAP_PROP_FRAME_HEIGHT, 480);
+    cap.set(cv::CAP_PROP_FRAME_WIDTH, 640);
+    cap.set(cv::CAP_PROP_FRAME_HEIGHT, 480);
     improc::ImageCorrector corr(cv::Size(640, 480), "../data/VGA/calib_param.xml");
 
     cv::Mat frame, corrected_frame;
 
+    std::cout << "cap.read(frame)" << std::endl;
     cap.read(frame);
     corrected_frame = frame.clone();
 
     int index = 0;
     while(cap.read(frame)) {
+        std::cout << "cap.read(frame) loop" << std::endl;
         corr.execute(frame, corrected_frame);
         cv::imshow("corrected_frame", corrected_frame);
 
