@@ -83,6 +83,7 @@ namespace ad {
         ExclusiveObj<std::unique_ptr<MotorController>>  motor_ctrl_;
         ExclusiveObj<std::unique_ptr<PcamController>>   pcam_ctrl_;
         ExclusiveObj<std::unique_ptr<WebcamController>> webcam_ctrl_;
+        ExclusiveObj<std::unique_ptr<zynqpl::Btns>> btns_;
 
         ExclusiveObj<bool>               run_flag_;
         ExclusiveObj<core::VehicleState> current_state_;

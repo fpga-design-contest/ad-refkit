@@ -13,5 +13,6 @@
 #include <pcam/pcam.h>
 #include <preimproc/preimproc.h>
 #include <motor/motor.h>
+#include <btns/btns.h>
 
 #endif /* ZYNQPL_INCLUDE_ZYNQPL_H_ */

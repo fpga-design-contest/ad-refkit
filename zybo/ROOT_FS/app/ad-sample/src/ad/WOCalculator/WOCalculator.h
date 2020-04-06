@@ -44,7 +44,8 @@ namespace ad {
         void update(const int& r_cnt, const int& l_cnt);
 
     private:
-        const std::string WO_PARAM_YAML_PATH    = "/data/OdometryCalculator/WOCalculator/param.yaml";
+        //const std::string WO_PARAM_YAML_PATH    = "/data/OdometryCalculator/WOCalculator/param.yaml";
+        const std::string WO_PARAM_YAML_PATH    = "/data/WOCalculator/param.yaml";
         const std::string MOTOR_PARAM_YAML_PATH = "/data/Common/motor.yaml";
 
         class MotorParam : public core::YAMLHelper::ParamBase {

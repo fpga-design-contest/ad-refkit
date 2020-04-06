@@ -42,6 +42,11 @@ mkdir -p $DTO_DIR/v4l2
 dtc -I dts -O dtb -o $SCRIPT_DIR/dts/v4l2.dtb $SCRIPT_DIR/dts/v4l2.dts
 cp $SCRIPT_DIR/dts/v4l2.dtb $DTO_DIR/v4l2/dtbo
 
+## btn-input
+mkdir -p $DTO_DIR/btn-input
+dtc -I dts -O dtb -o $SCRIPT_DIR/dts/btn-input.dtb $SCRIPT_DIR/dts/btn-input.dts
+cp $SCRIPT_DIR/dts/btn-input.dtb $DTO_DIR/btn-input/dtbo
+
 # 共有ライブラリのbuild
 cd $SCRIPT_DIR/lib
 sh build_all.sh

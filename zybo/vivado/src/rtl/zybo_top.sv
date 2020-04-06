@@ -40,9 +40,12 @@ module zybo_top
     inout  logic [0:0]  cam_gpio_tri_io);
 
    logic        clk200M;
+   logic        rstn;
    logic [31:0] r_target_rot_v, l_target_rot_v;
    logic [31:0] r_p_gain, l_p_gain;
    logic [31:0] r_rot_cnt, l_rot_cnt;
+   
+   logic [31:0] btns_tri;
 
    design_1_wrapper design_1_wrapper(.mipi_phy_if_0_clk_hs_p(dphy_hs_clock_clk_p),
                                      .mipi_phy_if_0_clk_hs_n(dphy_hs_clock_clk_n),
@@ -61,6 +64,7 @@ module zybo_top
                                      .l_p_gain(l_p_gain),
                                      .r_rot_cnt(r_rot_cnt),
                                      .l_rot_cnt(l_rot_cnt),
+                                     .btns_tri_i(btns_tri),
                                      .clk200M(clk200M),
                                      .rstn(rstn));
 
@@ -146,8 +150,8 @@ module zybo_top
              .rstn(rstn));
 
    always_comb begin
-      oled_dbg_tl = {l_target_rot_v[15:0], l_pulse_width[15:0]}; // [左モータ]設定角速度・出力パルス幅
-      oled_dbg_tr = {r_target_rot_v[15:0], r_pulse_width[15:0]}; // [右モータ]設定角速度・出力パルス幅
+      oled_dbg_tl = {l_target_rot_v[15:0], l_pulse_width[15:0]}; // [????????????]????????????????????????????????????
+      oled_dbg_tr = {r_target_rot_v[15:0], r_pulse_width[15:0]}; // [????????????]????????????????????????????????????
       oled_dbg_bl = l_rot_cnt; // {16'h0, 16'h0};
       oled_dbg_br = r_rot_cnt; // {16'h0, 16'h0};
    end
@@ -177,6 +181,9 @@ module zybo_top
         btn_r <= btn;
       end
    end
+   assign btns_tri[3:0] = btn_r;
+   assign btns_tri[7:4] = sw_r;
+   assign btns_tri[31:8] = 24'd0;
 
    //----------------------------------------------------------------
    // LED

@@ -25,6 +25,10 @@ namespace ad {
         line_tracer_.obj = std::make_unique<LineTracer>();
         webcam_ctrl_.obj = std::make_unique<WebcamController>();
         wo_calc_.obj     = std::make_unique<WOCalculator>();
+
+        // TODO replace uio5 with the parameter string
+        btns_.obj = std::make_unique<zynqpl::Btns>("uio5");
+
     }
 
     Handler::~Handler() {
@@ -50,7 +54,10 @@ namespace ad {
         while(true && !ep) {
             // TODO: ZYBOのBTNのAPIを作成する
             // if(<zyboのBTN2が押されたら>)
-            if(true) break;
+            //if(true) break;
+            int value = btns_.obj->getValue();
+            if((value & 0x4) != 0) std::cout << "Btn2 is pushed" << std::endl;
+            if((value & 0x4) != 0) break;
             std::this_thread::sleep_for(std::chrono::milliseconds(100));
         }
 
@@ -68,7 +75,10 @@ namespace ad {
                 while(true && !ep) {
                     // TODO: ZYBOのBTNのAPIを作成する
                     // if(<zyboのBTN1が押されたら>)
-                    if(true) break;
+                    //if(true) break;
+                    int value = btns_.obj->getValue();
+                    if((value & 0x2) != 0) std::cout << "Btn1 is pushed" << std::endl;
+                    if((value & 0x2) != 0) break;
                     {
                         std::lock_guard<ExclusiveObj<bool>> lock(run_flag_);
                         if(!run_flag_.obj) break;
@@ -166,7 +176,10 @@ namespace ad {
 
             // TODO: ZYBOのBTNのAPIを作成する
             // if(<zyboのBTN2が押されたら>)
-            if(false) {
+            //if(false) {
+            int value = btns_.obj->getValue();
+            if((value & 0x4) != 0) std::cout << "Btn2 is pushed" << std::endl;
+            if(!((value & 0x4) != 0)){
                 std::lock_guard<ExclusiveObj<bool>> lock(run_flag_);
                 run_flag_.obj = false;
             }

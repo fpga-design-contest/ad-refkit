@@ -9,6 +9,7 @@ devname:
    webcam:    "video0"
    iic:       "i2c-0"
    preimproc: "uio4"
+   btns:      "uio5"
 
 motor:
    gain:

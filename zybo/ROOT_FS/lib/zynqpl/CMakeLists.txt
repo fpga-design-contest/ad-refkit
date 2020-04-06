@@ -47,4 +47,5 @@ add_library(zynqpl SHARED
   src/pcam/video/VideoController.cpp
   src/preimproc/preimproc.cpp
   src/motor/motor.cpp
+  src/btns/btns.cpp
   )
