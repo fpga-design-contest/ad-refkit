@@ -27,7 +27,8 @@ namespace ad {
         wo_calc_.obj     = std::make_unique<WOCalculator>();
 
         // TODO replace uio5 with the parameter string
-        btns_.obj = std::make_unique<zynqpl::Btns>("uio5");
+        //btns_.obj = std::make_unique<zynqpl::Btns>("uio5");
+        button_ctrl_.obj = std::make_unique<ButtonController>();
 
     }
 
@@ -55,9 +56,11 @@ namespace ad {
             // TODO: ZYBOのBTNのAPIを作成する
             // if(<zyboのBTN2が押されたら>)
             //if(true) break;
-            int value = btns_.obj->getValue();
-            if((value & 0x4) != 0) std::cout << "Btn2 is pushed" << std::endl;
-            if((value & 0x4) != 0) break;
+            bool btn2 = button_ctrl_.obj->pushed(2);
+            if(btn2){
+                std::cout << "BTN2 is pushed" << std::endl;
+                break;
+            }
             std::this_thread::sleep_for(std::chrono::milliseconds(100));
         }
 
@@ -76,9 +79,11 @@ namespace ad {
                     // TODO: ZYBOのBTNのAPIを作成する
                     // if(<zyboのBTN1が押されたら>)
                     //if(true) break;
-                    int value = btns_.obj->getValue();
-                    if((value & 0x2) != 0) std::cout << "Btn1 is pushed" << std::endl;
-                    if((value & 0x2) != 0) break;
+                    bool btn1 = button_ctrl_.obj->pushed(1);
+                    if(btn1){
+                        std::cout << "Btn1 is pushed" << std::endl;
+                        break;
+                    }
                     {
                         std::lock_guard<ExclusiveObj<bool>> lock(run_flag_);
                         if(!run_flag_.obj) break;
@@ -176,10 +181,10 @@ namespace ad {
 
             // TODO: ZYBOのBTNのAPIを作成する
             // if(<zyboのBTN2が押されたら>)
-            //if(false) {
-            int value = btns_.obj->getValue();
-            if((value & 0x4) != 0) std::cout << "Btn2 is pushed" << std::endl;
-            if(!((value & 0x4) != 0)){
+            //if(false) { // true??
+            bool btn2 = button_ctrl_.obj->pushed(2);
+            if(btn2){
+                std::cout << "BTN2 is pushed" << std::endl;
                 std::lock_guard<ExclusiveObj<bool>> lock(run_flag_);
                 run_flag_.obj = false;
             }

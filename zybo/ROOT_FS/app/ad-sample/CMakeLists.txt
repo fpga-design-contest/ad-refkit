@@ -62,6 +62,7 @@ add_executable(${PROJECT_NAME}
   src/ad/HWController/PcamController/PcamController.cpp
   src/ad/HWController/PcamController/PcamImageCorrector/PcamImageCorrector.cpp
   src/ad/HWController/WebcamController/WebcamController.cpp
+  src/ad/HWController/ButtonController/ButtonController.cpp
   )
 
 target_link_libraries(${PROJECT_NAME}

@@ -14,6 +14,7 @@
 #include "HWController/MotorController/MotorController.h"
 #include "HWController/PcamController/PcamController.h"
 #include "HWController/WebcamController/WebcamController.h"
+#include "HWController/ButtonController/ButtonController.h"
 
 namespace ad {
     class Handler {
@@ -83,7 +84,7 @@ namespace ad {
         ExclusiveObj<std::unique_ptr<MotorController>>  motor_ctrl_;
         ExclusiveObj<std::unique_ptr<PcamController>>   pcam_ctrl_;
         ExclusiveObj<std::unique_ptr<WebcamController>> webcam_ctrl_;
-        ExclusiveObj<std::unique_ptr<zynqpl::Btns>> btns_;
+        ExclusiveObj<std::unique_ptr<ButtonController>> button_ctrl_;
 
         ExclusiveObj<bool>               run_flag_;
         ExclusiveObj<core::VehicleState> current_state_;
