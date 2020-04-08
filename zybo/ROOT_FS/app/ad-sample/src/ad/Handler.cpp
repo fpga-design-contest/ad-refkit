@@ -168,7 +168,7 @@ namespace ad {
 
                 std::lock_guard<ExclusiveObj<core::VehicleState>> lock_state(current_state_);
                 current_state_.obj   += wo;
-                current_state_.obj.v  = wo.norm() / std::chrono::duration_cast<std::chrono::microseconds>(current_time - prev_time).count();
+                current_state_.obj.v  = wo.norm() / std::chrono::duration_cast<std::chrono::microseconds>(current_time - prev_time).count() / 1000000.0;
                 current_state = current_state_.obj;
                 prev_time     = current_time;
             }
