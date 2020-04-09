@@ -156,6 +156,24 @@ module zybo_top
       oled_dbg_br = r_rot_cnt; // {16'h0, 16'h0};
    end
 
+    wire sda_o, sda_i, sda_t;
+    wire scl_o, scl_i, sctl_t;
+
+    oled_i2c_mon#(.CLK_DIV(CLK_FREQ/100/1000), .FREQ_MHZ(CLK_FREQ/1000/1000))
+    oled_i2c_inst(.clk(clk200M),
+		  .reset(~rstn),
+		  .dbg_tl(oled_dbg_tl),
+		  .dbg_tr(oled_dbg_tr),
+		  .dbg_bl(oled_dbg_bl),
+		  .dbg_br(oled_dbg_br),
+		  .sda_t(sda_t),
+		  .sda_o(sda_o),
+		  .sda_i(sda_i),
+		  .scl_t(scl_t), // '0' indicates sda_o is enabled
+		  .scl_o(scl_o),
+		  .scl_i(scl_i)
+		  );
+
    //-----------------------------------------------------------------------------
    // counter
    logic [31:0] cnt_r;
@@ -193,7 +211,10 @@ module zybo_top
    end
 
    always_ff @(posedge clk200M) begin
-      led_r <= cnt_r[27:24];
+       led_r[0] <= cnt_r[28];
+       led_r[1] <= cnt_r[28];
+       led_r[2] <= cnt_r[28];
+       led_r[3] <= cnt_r[28];
    end
 
    //----------------------------------------------------------------
@@ -239,8 +260,27 @@ module zybo_top
    assign je3  = 1'bz;
    assign je4  = 1'bz;
    assign je7  = 1'bz;
-   assign je8  = 1'bz;
-   assign je9  = 1'bz;
    assign je10 = oled_txd;
+
+   IOBUF #(
+      .DRIVE(12), // Specify the output drive strength
+      .IBUF_LOW_PWR("TRUE"),  // Low Power - "TRUE", High Performance = "FALSE" 
+      .IOSTANDARD("DEFAULT"), // Specify the I/O standard
+      .SLEW("SLOW") // Specify the output slew rate
+   ) IOBUF_sda (.O(sda_i),     // Buffer output
+		 .IO(je9),   // Buffer inout port (connect directly to top-level port)
+		 .I(sda_o),     // Buffer input
+		 .T(sda_t)      // 3-state enable input, high=input, low=output
+		 );
+   IOBUF #(
+      .DRIVE(12), // Specify the output drive strength
+      .IBUF_LOW_PWR("TRUE"),  // Low Power - "TRUE", High Performance = "FALSE" 
+      .IOSTANDARD("DEFAULT"), // Specify the I/O standard
+      .SLEW("SLOW") // Specify the output slew rate
+   ) IOBUF_scl (.O(scl_i),     // Buffer output
+		 .IO(je8),   // Buffer inout port (connect directly to top-level port)
+		 .I(scl_o),     // Buffer input
+		 .T(scl_t)      // 3-state enable input, high=input, low=output
+		 );
 
 endmodule
