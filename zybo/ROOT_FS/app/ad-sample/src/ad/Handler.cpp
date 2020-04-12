@@ -231,6 +231,7 @@ namespace ad {
 
                 {
                     std::lock_guard<ExclusiveObj<std::unique_ptr<WebcamController>>> lock(webcam_ctrl_);
+                    webcam_ctrl_.obj->updateWebCamImage();
                     webcam_img = webcam_ctrl_.obj->getWebCamImage().clone();
                 }
 
