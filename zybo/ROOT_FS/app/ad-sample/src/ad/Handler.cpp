@@ -174,9 +174,11 @@ namespace ad {
             }
 
             {
-                std::lock_guard<ExclusiveObj<std::unique_ptr<LineTracer>>> lock(line_tracer_);
+                std::lock_guard<ExclusiveObj<std::unique_ptr<LineTracer>>> lock_lt(line_tracer_);
                 core::AngularVelocity av;
                 line_tracer_.obj->calcAngularVelocity(bin_img, current_state, av);
+                std::lock_guard<ExclusiveObj<std::unique_ptr<MotorController>>> lock_mc(motor_ctrl_);
+                motor_ctrl_.obj->setWheelAngularVelocity(av);
             }
 
             // TODO: ZYBOのBTNのAPIを作成する
