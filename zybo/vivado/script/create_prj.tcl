@@ -134,6 +134,9 @@ set obj [get_filesets sources_1]
 set files [list \
  [file normalize "${origin_dir}/../src/rtl/oled_ctrl/hex2oled.v"] \
  [file normalize "${origin_dir}/../src/rtl/oled_ctrl/uart.v"] \
+ [file normalize "${origin_dir}/../src/rtl/oled_i2c_ctrl/clk_div.v"] \
+ [file normalize "${origin_dir}/../src/rtl/oled_i2c_ctrl/i2c_master.v"] \
+ [file normalize "${origin_dir}/../src/rtl/oled_i2c_ctrl/oled_i2c_mon.v"] \
  [file normalize "${origin_dir}/../src/rtl/motor_ctrl/motor_ctrl.sv"] \
  [file normalize "${origin_dir}/../src/rtl/motor_ctrl/p_controller.sv"] \
  [file normalize "${origin_dir}/../src/rtl/motor_ctrl/pwm_generator.sv"] \

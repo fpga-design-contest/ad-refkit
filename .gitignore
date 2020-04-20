@@ -20,6 +20,7 @@ zybo/ROOT_FS/lib/*/build/*
 *.o
 *.o.d
 *.o.cmd
+*~
 
 .ccls-cache
 
