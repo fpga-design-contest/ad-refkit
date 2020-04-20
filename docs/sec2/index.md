@@ -2,6 +2,7 @@
 This flow generates a sample IP-block, bit-stream for ZYBO Z7-20, and BSP for the generated HW.
 
 ## Requirements
+- Host PC, installed Ubuntu 18.04
 - Vivado 2019.1
 - [Digilent board files](https://github.com/Digilent/vivado-boards)
 - A license for MIPI CSI controller from [MIPI CSI Controller Subsystems](https://www.xilinx.com/products/intellectual-property/ef-di-mipi-csi-rx.html)
