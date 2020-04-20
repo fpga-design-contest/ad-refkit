@@ -1,5 +1,5 @@
 ## Building Linux
-It is able to skip this flow. The genereted files by this flow are available in this repository.
+It is able to skip this flow. The generated files by this flow are available in this repository.
 The files are the followings.
 - [uImage](../../zybo/BOOT_FS/uImage)
 - [zynq-zybo-z7.dtb](../../zybo/BOOT_FS/zynq-zybo-z7.dtb)
