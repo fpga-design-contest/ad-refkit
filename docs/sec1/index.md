@@ -27,11 +27,11 @@
 | USB Type-A to DC-jack                     | 1    |             |                                                                                                                                     |
 |  - ex. BENSN 10 in 1                      |      |             | https://www.amazon.co.jp/gp/product/B07Y5DCBRL/                                                                                     |
 | Battery holder for 4xAAA                  | 1    |             |                                                                                                                                     |
-| Base chassis                              | 1    | -           | ../../assets/cad/base_chassis/robocar_base.stl                                                                                      |
+| Base chassis                              | 1    | -           | [STL](../../assets/cad/base_chassis/robocar_base.stl)                                                                               |
 | Middle layer chassis                      | 1    | -           |                                                                                                                                     |
-| Pcam5C mounter                            | 1    | -           | ../../assets/cad/Pcam5C/Pcam5C_mounter.jpg                                                                                          |
-| OLED holder                               | 1    | -           | ../../assets/cad/OLED_holder/OLED_holder.stl                                                                                        |
-| HB5 holder                                | 2    | -           | ../../assets/cad/HB5_holder/HB5_holder.stl                                                                                          |
+| Pcam5C mounter                            | 1    | -           | [STL](../../assets/cad/Pcam5C/Pcam5C_mounter.stl)                                                                                   |
+| OLED holder                               | 1    | -           | [STL](../../assets/cad/OLED_holder/OLED_holder.stl)                                                                                 |
+| HB5 holder                                | 2    | -           | [STL](../../assets/cad/HB5_holder/HB5_holder.stl)                                                                                   |
 | spacers, screws, nuts, washers            |      |             |                                                                                                                                     |
 | wires                                     |      |             |                                                                                                                                     |
 | Self Adhesive magnetic tape               |      |             |                                                                                                                                     |
