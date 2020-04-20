@@ -14,7 +14,7 @@ then
     sh create_bitstream_bin.sh
     xsdk -batch -source create_bsp.tcl
     cp -R $AD_REFKIT_SAMPLE_SCRIPT_PATH/../prj/ad_refkit/ad_refkit.sdk/standalone_bsp_0/ps7_cortexa9_0 \
-          $AD_REFKIT_SAMPLE_SCRIPT_PATH/../../ROOT_FS/zynq_bspO/
+          $AD_REFKIT_SAMPLE_SCRIPT_PATH/../../ROOT_FS/zynq_bsp/
 else
     echo "Prease set environment value like this."
     echo "$ cd <ROOT OF THIS REPOSITORY>/zybo/vivado/script"
