@@ -8,5 +8,3 @@
 
 ![ad-refkit](./sec1/ad-refkit-image_s.jpg "ad-refkit")
 ![ad-refkit](./sec5/ad-sample.png "ad-sample")
-
-

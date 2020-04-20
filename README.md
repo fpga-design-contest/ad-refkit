@@ -1,8 +1,10 @@
 # ad-refkit-sample
 A sample design of the reference kit for FPGA Design Competition about autonomous driving
 
+![ad-refkit](./docs/sec1/ad-refkit-image_s.jpg "ad-refkit")
+
 # Setup
-See [Doc](./docs/README.md)
+See [Docucments](./docs/README.md).
 
 # Reference
 - Yuya Kudo (Ritsumeikan U.), Atsushi Takada (Ritsumeikan U.), Yuta Ishida (Ritsumeikan U.), and Tomonori Izumi (Ritsumeikan U.), "An SoC-FPGA-Based Micro UGV with Localization and Motion Planning", Proc. 2019 International Conference on Field-Programmable Technology, pp.469-472, DOI 10.1109/ICFPT47387.2019.00095, Dec.2019.
