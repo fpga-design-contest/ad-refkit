@@ -17,11 +17,11 @@
 | Web camera                                | 1    |             |                                                                                                                                     |
 |  - ex. BSW20KM11BK                        |      | iBUFFALO    | https://www.buffalo.jp/product/series/BSW20KM11BK                                                                                   |
 |  - ex. Logicool C270                      |      | Logicool    | https://www.logitech.com/en-us/product/hd-webcam-c270                                                                               |
-| USB Hub                                   | 1    | SANWASUPPLY | https://www.sanwa.co.jp/product/syohin.asp?code=USB-HTV410BKN                                                                       |
+| USB Hub                                   | 1    |             | https://www.sanwa.co.jp/product/syohin.asp?code=USB-HTV410BKN                                                                       |
 |  - ex. USB-HTV410BKN                      |      | SANWASUPPLY | https://www.sanwa.co.jp/product/syohin.asp?code=USB-HTV410BKN                                                                       |
 |  - ex. U2H-TZ427SBK                       |      | Elecom      | https://www.elecom.co.jp/products/U2H-TZ427SBK.html                                                                                 |
 | Debug console (character display)         | 1    |             |                                                                                                                                     |
-|  - ex. Kyohritsu OLED display module      |      | KYOHRITSU   | https://eleshop.jp/shop/g/gC9B362/                                                                                                  |
+|  - ex. Kyoritsu OLED display module       |      | KYOHRITSU   | https://eleshop.jp/shop/g/gC9B362/                                                                                                  |
 |  - ex. Akizuki OLED display module        |      | Akizuki     | http://akizukidenshi.com/catalog/g/gP-08277/                                                                                        |
 | micro SD                                  | 1    | -           | more than 8GB                                                                                                                       |
 | USB Type-A to DC-jack                     | 1    |             |                                                                                                                                     |

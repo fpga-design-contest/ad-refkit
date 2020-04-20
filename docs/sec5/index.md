@@ -46,6 +46,8 @@ $ make
 $ ./ad-sample
 ```
 
+![ad-sample](./ad-sample.png "ad-sample")
+
 ### make-calibration-param
 
 Execute camera calibration by using OpenCV.
