@@ -27,7 +27,7 @@
 | USB Type-A to DC-jack                     | 1    |             |                                                                                                                                     |
 |  - ex. BENSN 10 in 1                      |      |             | https://www.amazon.co.jp/gp/product/B07Y5DCBRL/                                                                                     |
 | Battery holder for 4xAAA                  | 1    |             |                                                                                                                                     |
-| Base chassis                              | 1    | -           | [STL](../../assets/cad/base_chassis/robocar_base.stl)                                                                               |
+| Base chassis                              | 1    | -           | [STEP](../../assets/cad/base_chassis/robocar_base2.step)                                                                            |
 | Middle layer chassis                      | 1    | -           |                                                                                                                                     |
 | Pcam5C mounter                            | 1    | -           | [STL](../../assets/cad/Pcam5C/Pcam5C_mounter.stl)                                                                                   |
 | OLED holder                               | 1    | -           | [STL](../../assets/cad/OLED_holder/OLED_holder.stl)                                                                                 |
