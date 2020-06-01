@@ -26,15 +26,17 @@ namespace ad {
         WebCamParam webcam_param;
         core::YAMLHelper::readStruct(root_path + HW_PARAM_YAML_PATH, webcam_param, "WebCam");
         auto webcam_size = cv::Size(webcam_param.width, webcam_param.height);
+        enable = webcam_param.enable;
+        if(enable){
+            webcam_cap_ = cv::VideoCapture('0' - devname_param.webcam.back()); // TODO: もう少し丁寧に判定する
+            if(!webcam_cap_.isOpened()) {
+                throw std::runtime_error("[" + std::string(__PRETTY_FUNCTION__) + "] " +
+                                         "Web camera device can not open");
+            }
 
-        webcam_cap_ = cv::VideoCapture('0' - devname_param.webcam.back()); // TODO: もう少し丁寧に判定する
-        if(!webcam_cap_.isOpened()) {
-            throw std::runtime_error("[" + std::string(__PRETTY_FUNCTION__) + "] " +
-                                     "Web camera device can not open");
+            webcam_cap_.set(cv::CAP_PROP_FRAME_WIDTH,  webcam_size.width);
+            webcam_cap_.set(cv::CAP_PROP_FRAME_HEIGHT, webcam_size.height);
         }
-
-        webcam_cap_.set(cv::CAP_PROP_FRAME_WIDTH,  webcam_size.width);
-        webcam_cap_.set(cv::CAP_PROP_FRAME_HEIGHT, webcam_size.height);
 
         std::string calibration_parameter_file;
         core::YAMLHelper::read(root_path + HW_PARAM_YAML_PATH, calibration_parameter_file, "WebCam", "calibration_parameter_file");
@@ -51,8 +53,10 @@ namespace ad {
     }
 
     void WebcamController::updateWebCamImage() {
-        webcam_cap_.read(webcam_img_buf_);
-        webcam_corrector_->execute(webcam_img_buf_, webcam_img_);
+        if(enable){
+            webcam_cap_.read(webcam_img_buf_);
+            webcam_corrector_->execute(webcam_img_buf_, webcam_img_);
+        }
     }
 }
 

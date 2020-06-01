@@ -49,10 +49,12 @@ namespace ad {
 
         class WebCamParam : public core::YAMLHelper::ParamBase {
         public:
+            uint32_t enable;
             uint32_t width;
             uint32_t height;
 
             void read(const cv::FileNode& node) override {
+                enable = (int)node["enable"];
                 width  = (int)node["width"];
                 height = (int)node["height"];
             }
@@ -60,6 +62,7 @@ namespace ad {
 
         std::unique_ptr<improc::ImageCorrector> webcam_corrector_;
 
+        uint32_t enable;
         cv::VideoCapture webcam_cap_;
         cv::Mat          webcam_img_buf_;
         cv::Mat          webcam_img_;
