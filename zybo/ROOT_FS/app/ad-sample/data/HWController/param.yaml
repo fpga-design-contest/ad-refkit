@@ -28,6 +28,7 @@ Pcam:
    calibration_parameter_file: "/data/HWController/pcam_calibration_parameter.xml"
 
 WebCam:
+   enable: 0
    width:  640
    height: 480
    calibration_parameter_file: "/data/HWController/webcam_vga_calibration_parameter.xml"
