@@ -157,7 +157,7 @@ module zybo_top
    end
 
     wire sda_o, sda_i, sda_t;
-    wire scl_o, scl_i, sctl_t;
+    wire scl_o, scl_i, scl_t;
 
     oled_i2c_mon#(.CLK_DIV(CLK_FREQ/100/1000), .FREQ_MHZ(CLK_FREQ/1000/1000))
     oled_i2c_inst(.clk(clk200M),
@@ -255,32 +255,21 @@ module zybo_top
    assign jd9  = l_sb;
    assign jd10 = l_sa;
 
-   assign je1  = 1'bz;
-   assign je2  = 1'bz;
-   assign je3  = 1'bz;
-   assign je4  = 1'bz;
+   //assign je1  = 1'bz;
+   //assign je2  = 1'bz;
+   //assign je3  = 1'bz;
+   //assign je4  = 1'bz;
    assign je7  = 1'bz;
+   assign je8  = 1'bz;
+   assign je9  = 1'bz;
    assign je10 = oled_txd;
 
-   IOBUF #(
-      .DRIVE(12), // Specify the output drive strength
-      .IBUF_LOW_PWR("TRUE"),  // Low Power - "TRUE", High Performance = "FALSE" 
-      .IOSTANDARD("DEFAULT"), // Specify the I/O standard
-      .SLEW("SLOW") // Specify the output slew rate
-   ) IOBUF_sda (.O(sda_i),     // Buffer output
-		 .IO(je9),   // Buffer inout port (connect directly to top-level port)
-		 .I(sda_o),     // Buffer input
-		 .T(sda_t)      // 3-state enable input, high=input, low=output
-		 );
-   IOBUF #(
-      .DRIVE(12), // Specify the output drive strength
-      .IBUF_LOW_PWR("TRUE"),  // Low Power - "TRUE", High Performance = "FALSE" 
-      .IOSTANDARD("DEFAULT"), // Specify the I/O standard
-      .SLEW("SLOW") // Specify the output slew rate
-   ) IOBUF_scl (.O(scl_i),     // Buffer output
-		 .IO(je8),   // Buffer inout port (connect directly to top-level port)
-		 .I(scl_o),     // Buffer input
-		 .T(scl_t)      // 3-state enable input, high=input, low=output
-		 );
+   assign je2 = (sda_t == 1'b0) ? sda_o : je1;
+   //assign sda_i = je2;
+   assign je1 = (sda_t == 1'b0) ? sda_o : 1'bz;
+   assign sda_i = je1;
+   assign je3 = (scl_t == 1'b0) ? scl_o : 1'bz;
+   assign scl_i = je3;
+   assign je4 = 1'b0;
 
 endmodule
