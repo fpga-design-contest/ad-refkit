@@ -4,7 +4,7 @@ Make partition with GParted. \
 If you have not installed GParted yet, install it.
 
 ``` sh
-$ sudo apt install gparted
+$ sudo apt install gparted debootstrap 
 ```
 
 Run GParted, and then make partitions on microSD as the followigns.
@@ -21,7 +21,7 @@ Run the following commands.
 
 ```
 # install Ubuntu 18.04 LTS and neessary packages
-$ sudo mount -o loop /dev/mmcblk0p2 /mnt # /dev/sdd1??
+$ sudo mount /dev/<YOUR SD #2> /mnt # ex. /dev/sdd2
 $ sudo debootstrap --foreign --arch armhf bionic /mnt http://ports.ubuntu.com/
 $ sudo apt install qemu-user-static
 $ sudo cp /usr/bin/qemu-arm-static /mnt/usr/bin/
