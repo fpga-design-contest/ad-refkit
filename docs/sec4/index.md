@@ -81,7 +81,7 @@ root@ubuntu:# cmake -D CMAKE_BUILD_TYPE=RELEASE \
                     -D OPENCV_GENERATE_PKGCONFIG=ON \
                     -D OPENCV_EXTRA_MODULES_PATH=$(printenv OPENCV_BUILD_PATH)/opencv_contrib/modules \
                     -D BUILD_EXAMPLES=ON ..
-root@ubuntu:# ccache make -j<some number>
+root@ubuntu:# ccache make -j<some number> # 3-4 hours, depends on your environment
 root@ubuntu:# make install
 root@ubuntu:# pkg-config --modversion opencv4
 root@ubuntu:# cd ../../../ && rm -rf opencv_build
