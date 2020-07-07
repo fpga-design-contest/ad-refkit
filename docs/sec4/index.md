@@ -59,7 +59,7 @@ Name=eth0
 Address=192.168.99.5/24
 Gateway=192.168.99.1
 DNS=192.168.99.1
-EOF
+EOT
 root@ubuntu:# systemctl enable systemd-networkd
 
 # install OpenCV 4.2.0
