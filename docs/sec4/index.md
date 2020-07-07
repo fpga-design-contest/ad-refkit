@@ -46,12 +46,20 @@ root@ubuntu:# sed -i -e 's/#PermitRootLogin prohibit-password/PermitRootLogin ye
 root@ubuntu:# sed -i -e 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 root@ubuntu:# echo 'server <available NTP server> iburst' >> /etc/ntp.conf # For example, ntp1.jst.mfeed.ad.jp
 root@ubuntu:# systemctl enable chrony
-root@ubuntu:# cat <<EOT > /etc/systemd/network/eth0.network
-              [Match]
-              Name=eth0
-              [Network]
-              DHCP=ipv4
-              EOT
+root@ubuntu:# cat <<EOT > /etc/systemd/network/eth0.network # if you want to use DHCP
+[Match]
+Name=eth0
+[Network]
+DHCP=ipv4
+EOT
+root@ubuntu:# cat <<EOT > /etc/systemd/network/eth0.network # if you want to set a static IP address
+[Match]
+Name=eth0
+[Network]
+Address=192.168.99.5/24
+Gateway=192.168.99.1
+DNS=192.168.99.1
+EOF
 root@ubuntu:# systemctl enable systemd-networkd
 
 # install OpenCV 4.2.0
