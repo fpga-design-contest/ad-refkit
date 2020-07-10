@@ -3,20 +3,32 @@ Connect ZYBO Z7-20 and host computer with Ethernet cable and USB cable.\
 And then, insert microSD card into ZYBO Z7-20 and turn on the power switch.\
 Access to ZYBO Z7-20 via USB tty and assign a IP-address to eth0.
 
+### Setup
+Set IP-address on ZYBO Z7-20:
+
 ``` sh
-$ ip addr add <IP ADDRESS> dev eth1
+# ip addr add <IP ADDRESS> dev eth0 # ex. ip addr add 192.168.2.100/24 dev eth0
 ```
 
-After that, transfer all of the files in `zybo/ROOT_FS` into `/root` on ZYBO Z7-20 .
+After that, transfer all of the files in `zybo/ROOT_FS` into `/root` on ZYBO Z7-20.
 
 ``` sh
 $ scp -r <ROOT OF THIS REPOSITORY>/zybo/ROOT_FS/* root@<IP ADDRESS>:/root
 ```
 
+### Login and setup kernel-modules and headers
+
+
 Login to Z7-20 as root by SSH.
 
 ``` sh
 $ ssh -X root@<IP ADDRESS>
+```
+
+In case that your ZYBO Z7-20 cannot connect the Internet, set date by your hand.
+
+```
+# date -s "10 JUL 2020 19:40:00" # an example
 ```
 
 At your first login, run the following commands to install Debian packages.
@@ -27,6 +39,73 @@ $ dpkg -i linux-image-4.19.0-xilinx_4.19.0-xilinx-4_armhf.deb
 $ dpkg -i linux-headers-4.19.0-xilinx_4.19.0-xilinx-4_armhf.deb
 $ dpkg -i linux-libc-dev_4.19.0-xilinx-4_armhf.deb
 ```
+
+### Setup WiFi (if necessary)
+
+Compile the driver on ZYBO Z7-20:
+
+```
+# cd /root/rtl8188eu
+# git checkout v5.2.2.4
+# make
+# make install
+```
+
+After building and installation of the driver, the dirver module will be loaded at the WiFi adapter connected as the following.
+
+```
+# lsmod 
+Module                  Size  Used by
+8188eu               1392640  0
+v4l2                   32768  0
+sha256_generic         20480  0
+cfg80211              249856  1 8188eu
+```
+
+You can find your adapter by `iwconfig`.
+
+```
+# iwconfig 
+eth0      no wireless extensions.
+
+lo        no wireless extensions.
+
+sit0      no wireless extensions.
+
+wlxd037451c9c81  IEEE 802.11  ESSID:off/any  
+          Mode:Managed  Access Point: Not-Associated   Tx-Power=12 dBm   
+          Retry short limit:7   RTS thr:off   Fragment thr:off
+          Encryption key:off
+          Power Management:on
+```
+
+You can make a setup of WiFi connection by the following instructions.
+
+1. Generate `wpa_supplicant.conf`
+
+```
+# wpa_passphrase <YOUR SSID> <YOUR PASSWORD> > /etc/wpa_supplicant/wpa_supplicant.conf
+```
+
+2. Add some parameters in `/etc/wpa_supplicant/wpa_supplicant.conf`
+
+```
+        proto=RSN
+        key_mgmt=WPA-PSK
+        pairwise=CCMP
+        group=CCMP
+```
+
+3. Connect WiFi access point and get IP-address
+
+```
+# wpa_supplicant -iwlxd037451c9c81 -c/etc/wpa_supplicant/wpa_supplicant.conf
+# dhclient wlxd037451c9c81
+```
+
+The WiFi modules work well are Buffalo WLI-UC-GNM, PLANEX GW-USValue-EZ, TP-Link TL-WN725N, and Elecom WDC-150SU2MBK.
+
+### Beforer running applictions
 
 Then execute `init.sh`.
 Executing this script is necessary every time before running ad-refkit applications.

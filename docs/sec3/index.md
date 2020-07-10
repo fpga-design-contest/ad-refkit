@@ -17,7 +17,7 @@ $ git commit -m "update dts for zybo-z7"
 $ git tag -a xilinx-v2019.1-zybo-z7-3 -m "release xilinx-v2019.1-zybo-z7-3"
 $ echo 3 > .version
 $ make xilinx_zynq_defconfig ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf-
-$ cp <ROOT OF THIS REPOSITORY>/assets/patch/dot.config .config
+$ patch -p0 < <ROOT OF THIS REPOSITORY>/assets/patch/dot.config.patch
 $ ccache make -j<some number> deb-pkg ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- DTC_FLAGS=--symbols
 $ make uImage ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- UIMAGE_LOADADDR=0x8000
 $ cp arch/arm/boot/uImage <ROOT OF THIS REPOSITORY>/zybo/BOOT_FS

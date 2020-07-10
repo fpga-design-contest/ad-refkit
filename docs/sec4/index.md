@@ -17,7 +17,9 @@ $ sudo gparted
 - 2nd partition : ext4, all of rest
 
 ### 2. Prepare rootfs
-Run the following commands.
+Run the following commands on MicroSD or your host storage. Building on MicroSD requires longer time.
+
+#### Building rootfs on MicroSD
 
 ```
 # install Ubuntu 18.04 LTS and neessary packages
@@ -37,8 +39,7 @@ root@ubuntu:# apt install locales ssh chrony libusb-1.0-0-dev
 root@ubuntu:# locale-gen en_US.UTF-8
 root@ubuntu:# apt install git
 root@ubuntu:# git clone -b v1.4.7 https://git.kernel.org/pub/scm/utils/dtc/dtc.git dtc && cd dtc
-root@ubuntu:# apt install build-essential
-root@ubuntu:# apt install flex bison
+root@ubuntu:# apt install build-essential flex bison
 root@ubuntu:# make && make HOME=/usr install-bin
 root@ubuntu:# cd .. && rm -rf dtc
 root@ubuntu:# sed -i -e 's/#PasswordAuthentication/PasswordAuthentication/g' /etc/ssh/sshd_config
@@ -46,20 +47,12 @@ root@ubuntu:# sed -i -e 's/#PermitRootLogin prohibit-password/PermitRootLogin ye
 root@ubuntu:# sed -i -e 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 root@ubuntu:# echo 'server <available NTP server> iburst' >> /etc/ntp.conf # For example, ntp1.jst.mfeed.ad.jp
 root@ubuntu:# systemctl enable chrony
-root@ubuntu:# cat <<EOT > /etc/systemd/network/eth0.network # if you want to use DHCP
-[Match]
-Name=eth0
-[Network]
-DHCP=ipv4
-EOT
-root@ubuntu:# cat <<EOT > /etc/systemd/network/eth0.network # if you want to set a static IP address
-[Match]
-Name=eth0
-[Network]
-Address=192.168.99.5/24
-Gateway=192.168.99.1
-DNS=192.168.99.1
-EOT
+root@ubuntu:# cat <<EOT > /etc/systemd/network/eth0.network
+              [Match]
+              Name=eth0
+              [Network]
+              DHCP=ipv4
+              EOT
 root@ubuntu:# systemctl enable systemd-networkd
 
 # install OpenCV 4.2.0
@@ -81,12 +74,90 @@ root@ubuntu:# cmake -D CMAKE_BUILD_TYPE=RELEASE \
                     -D OPENCV_GENERATE_PKGCONFIG=ON \
                     -D OPENCV_EXTRA_MODULES_PATH=$(printenv OPENCV_BUILD_PATH)/opencv_contrib/modules \
                     -D BUILD_EXAMPLES=ON ..
-root@ubuntu:# ccache make -j<some number> # 3-4 hours, depends on your environment
+root@ubuntu:# ccache make -j<some number> # 4-5 hours, depends on your environment
 root@ubuntu:# make install
 root@ubuntu:# pkg-config --modversion opencv4
 root@ubuntu:# cd ../../../ && rm -rf opencv_build
-
+root@ubuntu:# apt install -y wireless-tools rfkill wpasupplicant linux-firmware libssl-dev usbutils
+root@ubuntu:# cd /root
+root@ubuntu:# git clone https://github.com/lwfinger/rtl8188eu.git
 root@ubuntu:# exit
+I have no name!@ubuntu:# exit
+$ sync; sync; sync
+$ sudo umount /mnt
+$ sudo eject /dev/<YOUR SD> /mnt # ex. /dev/sdd
+```
+
+#### Building rootfs on your host and copy them to MicroSD
+
+```
+$ mkdir <WORKING DIRECTORY>; cd <WORKING DIRECTORY> # ~/microsd
+$ export WORKDIR=$(pwd)
+$ sudo debootstrap --foreign --arch armhf bionic $WORKDIR http://ports.ubuntu.com/ 
+$ sudo apt install qemu-user-static
+$ sudo cp /usr/bin/qemu-arm-static $WORKDIR/usr/bin/
+$ sudo chroot $WORKDIR
+I have no name!@ubuntu:# ./debootstrap/debootstrap --second-stage
+I have no name!@ubuntu:# passwd
+I have no name!@ubuntu:# su
+root@ubuntu:# passwd
+root@ubuntu:# apt install -y software-properties-common
+root@ubuntu:# add-apt-repository universe && apt update
+root@ubuntu:# adduser user
+root@ubuntu:# apt install -y locales ssh chrony libusb-1.0-0-dev ntpdate bc
+root@ubuntu:# locale-gen en_US.UTF-8
+root@ubuntu:# apt install -y git
+root@ubuntu:# git clone -b v1.4.7 https://git.kernel.org/pub/scm/utils/dtc/dtc.git dtc && cd dtc
+root@ubuntu:# apt install -y build-essential flex bison
+root@ubuntu:# make && make HOME=/usr install-bin
+root@ubuntu:# cd .. && rm -rf dtc
+root@ubuntu:# sed -i -e 's/#PasswordAuthentication/PasswordAuthentication/g' /etc/ssh/sshd_config
+root@ubuntu:# sed -i -e 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
+root@ubuntu:# sed -i -e 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
+root@ubuntu:# echo 'server <available NTP server> iburst' >> /etc/ntp.conf # For example, ntp1.jst.mfeed.ad.jp
+root@ubuntu:# systemctl enable chrony
+root@ubuntu:# cat <<EOT > /etc/systemd/network/eth0.network
+              [Match]
+              Name=eth0
+              [Network]
+              DHCP=ipv4
+              EOT
+root@ubuntu:# systemctl enable systemd-networkd
+
+# install OpenCV 4.2.0
+root@ubuntu:# apt install -y \
+              build-essential cmake ccache git pkg-config libgtk-3-dev \
+              libavcodec-dev libavformat-dev libswscale-dev libv4l-dev \
+              libxvidcore-dev libx264-dev libjpeg-dev libpng-dev libtiff-dev \
+              gfortran openexr libatlas-base-dev python3-dev python3-numpy \
+              libtbb2 libtbb-dev libdc1394-22-dev
+root@ubuntu:# mkdir opencv_build && cd opencv_build
+root@ubuntu:# git clone --depth 1 https://github.com/opencv/opencv.git
+root@ubuntu:# git clone --depth 1 https://github.com/opencv/opencv_contrib.git
+root@ubuntu:# export OPENCV_BUILD_PATH=$(pwd)
+root@ubuntu:# cd opencv && mkdir build && cd build
+root@ubuntu:# cmake -D CMAKE_BUILD_TYPE=RELEASE \
+                    -D CMAKE_INSTALL_PREFIX=/usr/local \
+                    -D INSTALL_C_EXAMPLES=ON \
+                    -D INSTALL_PYTHON_EXAMPLES=ON \
+                    -D OPENCV_GENERATE_PKGCONFIG=ON \
+                    -D OPENCV_EXTRA_MODULES_PATH=$(printenv OPENCV_BUILD_PATH)/opencv_contrib/modules \
+                    -D BUILD_EXAMPLES=ON ..
+root@ubuntu:# ccache make -j<some number> # 2-3 hours, depends on your environment
+root@ubuntu:# make install
+root@ubuntu:# pkg-config --modversion opencv4
+root@ubuntu:# cd ../../../ && rm -rf opencv_build
+root@ubuntu:# apt install -y wireless-tools rfkill wpasupplicant linux-firmware libssl-dev usbutils
+root@ubuntu:# cd /root
+root@ubuntu:# git clone https://github.com/lwfinger/rtl8188eu.git
+root@ubuntu:# exit
+I have no name!@ubuntu:# exit
+$ sudo mount /dev/<YOUR SD #2> /mnt # ex. /dev/sdd2
+$ cd $WORKDIR
+$ sudo tar cpvf - * | sudo tar xpvf - -C /mnt
+$ sync; sync; sync
+$ sudo umount /mnt
+$ sudo eject /dev/<YOUR SD> /mnt # ex. /dev/sdd
 ```
 
 ### 3. Prepare bootfs
