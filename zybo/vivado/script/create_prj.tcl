@@ -1335,6 +1335,7 @@ proc create_hier_cell_cam_interface { parentCell nameHier } {
 
   # Create ports
   set clk200M [ create_bd_port -dir O -type clk clk200M ]
+  set clk100M [ create_bd_port -dir O -type clk clk100M ]
   set l_p_gain [ create_bd_port -dir O -from 31 -to 0 l_p_gain ]
   set l_rot_cnt [ create_bd_port -dir I -from 31 -to 0 l_rot_cnt ]
   set l_target_rot_v [ create_bd_port -dir O -from 31 -to 0 l_target_rot_v ]
@@ -1388,7 +1389,7 @@ proc create_hier_cell_cam_interface { parentCell nameHier } {
   connect_bd_net -net motor_ctl_p_gain [get_bd_ports r_p_gain] [get_bd_pins motor_ctl/r_p_gain]
   connect_bd_net -net motor_ctl_target_vot [get_bd_ports r_target_rot_v] [get_bd_pins motor_ctl/r_target_rot_v]
   connect_bd_net -net preimproc_s2mm_introut [get_bd_pins preimproc/s2mm_introut] [get_bd_pins ps_block/IRQ_F2P]
-  connect_bd_net -net processing_system7_0_FCLK_CLK0 [get_bd_pins btn_input/s_axi_aclk] [get_bd_pins cam_interface/video_aclk] [get_bd_pins motor_ctl/s_axi_aclk] [get_bd_pins preimproc/video_aclk] [get_bd_pins ps_block/clk100M]
+  connect_bd_net -net processing_system7_0_FCLK_CLK0 [get_bd_pins btn_input/s_axi_aclk] [get_bd_pins cam_interface/video_aclk] [get_bd_pins motor_ctl/s_axi_aclk] [get_bd_pins preimproc/video_aclk] [get_bd_pins ps_block/clk100M] [get_bd_ports clk100M]
   connect_bd_net -net rot_cnt_1 [get_bd_ports r_rot_cnt] [get_bd_pins motor_ctl/r_rot_cnt]
   connect_bd_net -net rst_ps7_0_50M_peripheral_aresetn [get_bd_ports rstn] [get_bd_pins btn_input/s_axi_aresetn] [get_bd_pins cam_interface/rstn] [get_bd_pins motor_ctl/s_axi_aresetn] [get_bd_pins preimproc/rstn] [get_bd_pins ps_block/rstn]
 

@@ -56,11 +56,12 @@ module p_controller
    logic signed [BAND_WIDTH*2-1:0] error_r, p_error_r;
    logic signed [BAND_WIDTH*2-1:0] p_term_r;
    logic signed [BAND_WIDTH*2-1:0] p_term_w;
+   logic [31:0] p_gain_r;
 
    always_comb begin
       update_flag   = (cnt_r == UPDATE_INTERVAL) ? 1 : 0;
       error_w       = $signed(target_rot_v) - (rotate_samp_cnt_r * $signed(RESOLUTION));
-      p_term_w      = ($signed(p_gain) * error_r);
+      p_term_w      = ($signed(p_gain_r) * error_r);
       pulse_width_w = pulse_width_r + p_term_r;
       pulse_width   = pulse_width_r;
    end
@@ -77,6 +78,7 @@ module p_controller
          p_term_r          <= 0;
       end
       else begin
+         p_gain_r <= p_gain;
          if(update_flag) begin
             cnt_r <= 0;
          end
