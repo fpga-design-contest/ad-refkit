@@ -24,7 +24,7 @@
 
 module zybo_top
   #(localparam
-    CLK_FREQ = 200_000_000)
+    CLK_FREQ = 100_000_000)
    (output logic [3:0]  led,
     input  logic [3:0]  btn, sw,
     inout  logic        ja1, ja2, ja3, ja4, ja7, ja8, ja9, ja10,
@@ -40,6 +40,7 @@ module zybo_top
     inout  logic [0:0]  cam_gpio_tri_io);
 
    logic        clk200M;
+   logic        clk100M;
    logic        rstn;
    logic [31:0] r_target_rot_v, l_target_rot_v;
    logic [31:0] r_p_gain, l_p_gain;
@@ -65,6 +66,7 @@ module zybo_top
                                      .r_rot_cnt(r_rot_cnt),
                                      .l_rot_cnt(l_rot_cnt),
                                      .btns_tri_i(btns_tri),
+                                     .clk100M(clk100M),
                                      .clk200M(clk200M),
                                      .rstn(rstn));
 
@@ -88,7 +90,7 @@ module zybo_top
                          .p_gain(r_p_gain),
                          .sa(r_sa_q3),
                          .sb(r_sb_q3),
-                         .clk(clk200M),
+                         .clk(clk100M),
                          .rstn(rstn));
 
    motor_ctrl #(.CLK_FREQ(CLK_FREQ))
@@ -100,11 +102,11 @@ module zybo_top
                         .p_gain(l_p_gain),
                         .sa(l_sa_q3),
                         .sb(l_sb_q3),
-                        .clk(clk200M),
+                        .clk(clk100M),
                         .rstn(rstn));
 
    // for preventing meta-stable
-   always_ff @(posedge clk200M) begin
+   always_ff @(posedge clk100M) begin
       if(!rstn) begin
          r_sa_q1 <= 0;
          r_sa_q2 <= 0;
@@ -146,7 +148,7 @@ module zybo_top
              .dbg_bl(oled_dbg_bl),
              .dbg_br(oled_dbg_br),
              .txd(oled_txd),
-             .clk(clk200M),
+             .clk(clk100M),
              .rstn(rstn));
 
    always_comb begin
@@ -160,7 +162,7 @@ module zybo_top
     wire scl_o, scl_i, scl_t;
 
     oled_i2c_mon#(.CLK_DIV(CLK_FREQ/100/1000), .FREQ_MHZ(CLK_FREQ/1000/1000))
-    oled_i2c_inst(.clk(clk200M),
+    oled_i2c_inst(.clk(clk100M),
 		  .reset(~rstn),
 		  .dbg_tl(oled_dbg_tl),
 		  .dbg_tr(oled_dbg_tr),
@@ -177,7 +179,7 @@ module zybo_top
    //-----------------------------------------------------------------------------
    // counter
    logic [31:0] cnt_r;
-   always_ff @(posedge clk200M) begin
+   always_ff @(posedge clk100M) begin
       if(!rstn) begin
          cnt_r <= 0;
       end
@@ -189,7 +191,7 @@ module zybo_top
    //----------------------------------------------------------------
    // SW, BTN
    logic [3:0] sw_r, btn_r;
-   always_ff @(posedge clk200M) begin
+   always_ff @(posedge clk100M) begin
       if(!rstn) begin
          sw_r  <= 0;
          btn_r <= 0;
@@ -210,7 +212,7 @@ module zybo_top
       led = led_r;
    end
 
-   always_ff @(posedge clk200M) begin
+   always_ff @(posedge clk100M) begin
        led_r[0] <= cnt_r[28];
        led_r[1] <= cnt_r[28];
        led_r[2] <= cnt_r[28];
