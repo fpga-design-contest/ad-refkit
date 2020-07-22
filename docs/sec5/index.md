@@ -81,13 +81,13 @@ wlxd037451c9c81  IEEE 802.11  ESSID:off/any
 
 You can make a setup of WiFi connection by the following instructions.
 
-1. Generate `wpa_supplicant.conf`
+1. Generate `wpa_supplicant.conf` (only first time to connect the target SSID)
 
 ```
 # wpa_passphrase <YOUR SSID> <YOUR PASSWORD> > /etc/wpa_supplicant/wpa_supplicant.conf
 ```
 
-2. Add some parameters in `/etc/wpa_supplicant/wpa_supplicant.conf`
+2. Add some parameters in `/etc/wpa_supplicant/wpa_supplicant.conf` (only first time to connect the target SSID)
 
 ```
         proto=RSN
@@ -99,7 +99,7 @@ You can make a setup of WiFi connection by the following instructions.
 3. Connect WiFi access point and get IP-address
 
 ```
-# wpa_supplicant -iwlxd037451c9c81 -c/etc/wpa_supplicant/wpa_supplicant.conf
+# wpa_supplicant -iwlxd037451c9c81 -c/etc/wpa_supplicant/wpa_supplicant.conf &
 # dhclient wlxd037451c9c81
 ```
 
