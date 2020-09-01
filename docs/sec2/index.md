@@ -6,7 +6,7 @@ This flow generates a sample IP-block, bit-stream for ZYBO Z7-20, and BSP for th
 - Vivado 2019.1
 - [Digilent board files](https://github.com/Digilent/vivado-boards)
 - A license for MIPI CSI controller from [MIPI CSI Controller Subsystems](https://www.xilinx.com/products/intellectual-property/ef-di-mipi-csi-rx.html)
-  - Access to [Product Licensing](http://www.xilinx.com/getlicense]
+  - Access to [Product Licensing](http://www.xilinx.com/getlicense)
   - Click "Search Now"
   - Type "MIPI CSI" in "Search:" text field
   - Select "LogiCORE, MIPI CSI-2 Rx Controller, Evaluation License" and Click "Add" button
