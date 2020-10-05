@@ -2,7 +2,7 @@
 
 1. [Refkit Body](./sec1/index.md)
 1. [Building Hardware Design](./sec2/index.md)
-1. [Building Linux](./sec3/index.md) ...It is able to skip this step.
+1. [Building Linux](./sec3/index.md) optional, prebuilt files are available.
 1. [Prepare microSD](./sec4/index.md)
 1. [Run Application](./sec5/index.md)
 
