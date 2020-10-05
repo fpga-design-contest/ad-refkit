@@ -19,7 +19,7 @@ $ sudo gparted
 Pay attention to your MicroSD location (`/dev/sdX`) with X denoting your MicroSD location. Be careful not to use another drive.
 
 ### 2. Prepare rootfs
-The next step is building the debian root filesystem for the FPGA board. There are two ways to achieve this: building the entire filesystem on host PC, then copy the resulting files to the MicroSD, or mount the MicroSD and build the filesystem directly on the MicroSD. The latter is considerably slower than the former. As a third option, a script to streamline the building proces is also prepared for your convenience.
+The next step is building the debian root filesystem for the FPGA board. There are two ways to achieve this: building the entire filesystem on host PC, then copy the resulting files to the MicroSD, or mount the MicroSD and build the filesystem directly on the MicroSD. The latter is considerably slower than the former. As a third option, we can use the provided script to streamline the building process for your convenience.
 
 To achieve this, we will create a new chroot-ed directory for the debootstrap to work, then set the architecture of the filesystem to ARM. QEMU will be used to run the chroot-ed ARM filesystem on your PC. As the debootstrap completes its task, we will then install and configure the system as well as compiling OpenCV. The OpenCV compilation might take few hours depending on your PC. 
 
