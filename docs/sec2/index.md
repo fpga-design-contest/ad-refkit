@@ -5,7 +5,7 @@ This flow generates a sample IP-block, bit-stream for ZYBO Z7-20, and BSP for th
 - Host PC, with Ubuntu 18.04
 - Vivado 2019.1
 - [Digilent board files](https://github.com/Digilent/vivado-boards)
-- A license for MIPI CSI controller from [MIPI CSI Controller Subsystems](https://www.xilinx.com/products/intellectual-property/ef-di-mipi-csi-rx.html)
+- A license for MIPI CSI controller from [MIPI CSI Controller Subsystems](https://www.xilinx.com/products/intellectual-property/ef-di-mipi-csi-rx.html) This license is already included in your Vivado license if you obtained your Webpack license from January 2020, the following step might be required if you have the older Webpack license:
   - Access to [Product Licensing](http://www.xilinx.com/getlicense)
   - Click "Search Now"
   - Type "MIPI CSI" in "Search:" text field
