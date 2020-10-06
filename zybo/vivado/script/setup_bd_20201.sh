@@ -8,8 +8,8 @@ then
     rm -rf ad_refkit
     rm -rf preimproc_prj
     env SWT_GTK3=0 vivado_hls $AD_REFKIT_SAMPLE_SCRIPT_PATH/generate_hls_ip.tcl
-    patch $AD_REFKIT_SAMPLE_SCRIPT_PATH/create_prj.tcl $AD_REFKIT_SAMPLE_SCRIPT_PATH/update20201.patch
-    env SWT_GTK3=0 vivado -mode batch -source $AD_REFKIT_SAMPLE_SCRIPT_PATH/create_prj.tcl
+    patch $AD_REFKIT_SAMPLE_SCRIPT_PATH/create_prj.tcl $AD_REFKIT_SAMPLE_SCRIPT_PATH/update20201.patch -o $AD_REFKIT_SAMPLE_SCRIPT_PATH/create_prj_20201.tcl
+    env SWT_GTK3=0 vivado -mode batch -source $AD_REFKIT_SAMPLE_SCRIPT_PATH/create_prj_20201.tcl
     env SWT_GTK3=0 vivado -mode batch -source $AD_REFKIT_SAMPLE_SCRIPT_PATH/export_xsa.tcl
     cd $AD_REFKIT_SAMPLE_SCRIPT_PATH
     chmod u+x fpga-bit2bin.py
