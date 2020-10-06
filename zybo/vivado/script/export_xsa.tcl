@@ -1,5 +1,5 @@
 #open project
-open_project /home/boma/migrate/ad-refkit/zybo/vivado/prj/ad_refkit/ad_refkit.xpr
+open_project ../prj/ad_refkit/ad_refkit.xpr
 update_compile_order -fileset sources_1
 
 #write xsa files for vitis
