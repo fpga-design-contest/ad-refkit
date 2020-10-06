@@ -1,0 +1,20 @@
+--- create_prj.tcl	2020-10-03 20:56:52.332383000 +0900
++++ create_prj.tcl	2020-10-06 22:13:15.859665841 +0900
+@@ -245,7 +245,7 @@
+   xilinx.com:ip:axi_gpio:2.0\
+   Digilent:user:AXI_BayerToRGB:1.0\
+   Digilent:user:AXI_GammaCorrection:1.0\
+-  xilinx.com:ip:mipi_csi2_rx_subsystem:4.0\
++  xilinx.com:ip:mipi_csi2_rx_subsystem:5.0\
+   xilinx.com:ip:axi_vdma:6.3\
+   xilinx.com:hls:preimproc:1.0\
+   xilinx.com:ip:smartconnect:1.0\
+@@ -1268,7 +1268,7 @@
+   set AXI_GammaCorrection_0 [ create_bd_cell -type ip -vlnv Digilent:user:AXI_GammaCorrection:1.0 AXI_GammaCorrection_0 ]
+ 
+   # Create instance: mipi_csi2_rx_subsyst_0, and set properties
+-  set mipi_csi2_rx_subsyst_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:mipi_csi2_rx_subsystem:4.0 mipi_csi2_rx_subsyst_0 ]
++  set mipi_csi2_rx_subsyst_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:mipi_csi2_rx_subsystem:5.0 mipi_csi2_rx_subsyst_0 ]
+   set_property -dict [ list \
+    CONFIG.CMN_NUM_LANES {2} \
+    CONFIG.CMN_NUM_PIXELS {4} \

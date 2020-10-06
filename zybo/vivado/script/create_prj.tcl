@@ -245,7 +245,7 @@ proc cr_bd_design_1 { parentCell } {
   xilinx.com:ip:axi_gpio:2.0\
   Digilent:user:AXI_BayerToRGB:1.0\
   Digilent:user:AXI_GammaCorrection:1.0\
-  xilinx.com:ip:mipi_csi2_rx_subsystem:4.0\
+  xilinx.com:ip:mipi_csi2_rx_subsystem:5.0\
   xilinx.com:ip:axi_vdma:6.3\
   xilinx.com:hls:preimproc:1.0\
   xilinx.com:ip:smartconnect:1.0\
@@ -1268,7 +1268,7 @@ proc create_hier_cell_cam_interface { parentCell nameHier } {
   set AXI_GammaCorrection_0 [ create_bd_cell -type ip -vlnv Digilent:user:AXI_GammaCorrection:1.0 AXI_GammaCorrection_0 ]
 
   # Create instance: mipi_csi2_rx_subsyst_0, and set properties
-  set mipi_csi2_rx_subsyst_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:mipi_csi2_rx_subsystem:4.0 mipi_csi2_rx_subsyst_0 ]
+  set mipi_csi2_rx_subsyst_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:mipi_csi2_rx_subsystem:5.0 mipi_csi2_rx_subsyst_0 ]
   set_property -dict [ list \
    CONFIG.CMN_NUM_LANES {2} \
    CONFIG.CMN_NUM_PIXELS {4} \
