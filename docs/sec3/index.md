@@ -1,13 +1,13 @@
 ## Building Linux
-It is able to skip this flow. The generated files by this flow are available in this repository.
-The files are the followings.
+This step is optional. The generated files by this flow are available in this repository.
+The required files are as follows:
 - [uImage](../../zybo/BOOT_FS/uImage)
 - [zynq-zybo-z7.dtb](../../zybo/BOOT_FS/zynq-zybo-z7.dtb)
 - [Debian packages (headers, image, libc)](../../zybo/ROOT_FS/package/)
 
-If you want to build Linux on your computer, please run the followings.
+If you want to build the Linux kernel on your computer, please run the followings:
 ``` sh
-$ apt install build-essential ccache bc bison flex ncurses-dev git u-boot-tools
+$ apt install build-essential ccache bc bison flex ncurses-dev git u-boot-tools gcc-arm*
 $ git clone --depth 1 -b xilinx-v2019.1 https://github.com/Xilinx/linux-xlnx.git linux-xlnx-v2019.1-zybo-z7 && cd linux-xlnx-v2019.1-zybo-z7
 $ git checkout -b linux-xlnx-v2019.1-zybo-z7 refs/tags/xilinx-v2019.1
 $ sed -i -e 's|bootargs = ""|bootargs = "console=ttyPS0,115200 root=/dev/mmcblk0p2 rw earlyprintk rootfstype=ext4 rootwait devtmpfs.mount=1 uio_pdrv_genirq.of_id=generic-uio earlycon"|g' arch/arm/boot/dts/zynq-zybo-z7.dts

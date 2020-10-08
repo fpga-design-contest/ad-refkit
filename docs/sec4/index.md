@@ -1,13 +1,13 @@
 ## Prepare microSD
-### 1. Format microSD
+### 1. Format the MicroSD Card
 Make partition with GParted. \
-If you have not installed GParted yet, install it.
+If you do not have GParted installed yet, please install it. Also, debootstrap is required to create a basic debian filesystem on the MicroSD.
 
 ``` sh
 $ sudo apt install gparted debootstrap 
 ```
 
-Run GParted, and then make partitions on microSD as the followigns.
+Run GParted, and then make two partitions on the MicroSD as follows:
 
 ``` sh
 $ sudo gparted
@@ -17,9 +17,12 @@ $ sudo gparted
 - 2nd partition : ext4, all of rest
 
 ### 2. Prepare rootfs
-Run the following commands on MicroSD or your host storage. Building on MicroSD requires longer time.
+The next step is building the debian root filesystem for the FPGA board. There are two ways to achieve this: building the entire filesystem on host PC, then copy the resulting files to the MicroSD, or mount the MicroSD and build the filesystem directly on the MicroSD. The latter is considerably slower than the former.
 
-#### Building rootfs on MicroSD
+To achieve this, we will create a new chroot-ed directory for the debootstrap to work, then set the architecture of the filesystem to ARM. QEMU will be used to run the chroot-ed ARM filesystem on your PC. As the debootstrap completes its task, we will then install and configure the system as well as compiling OpenCV. The OpenCV compilation might take few hours depending on your PC.
+
+
+#### Building rootfs directly on the MicroSD
 
 ```
 # install Ubuntu 18.04 LTS and neessary packages
@@ -88,7 +91,7 @@ $ sudo umount /mnt
 $ sudo eject /dev/<YOUR SD> /mnt # ex. /dev/sdd
 ```
 
-#### Building rootfs on your host and copy them to MicroSD
+#### Building rootfs on your host PC and copy the files to MicroSD
 
 ```
 $ mkdir <WORKING DIRECTORY>; cd <WORKING DIRECTORY> # ~/microsd
@@ -169,7 +172,7 @@ Copy the following five files into bootfs i.e. 1st partition.
 - [uramdisk.image.gz](../../zybo/BOOT_FS/uramdisk.image.gz)
 - [zynq-zybo-z7.dtb](../../zybo/BOOT_FS/zynq-zybo-z7.dtb)
 
-It is able to use the files in `zybo/BOOT_FS` as they are.
+We can use files generated in [Building Linux](../sec3/index.md) or use files in `zybo/BOOT_FS` as they are.
 
 #### 3.1 BOOT.bin
 `BOOT.bin` is generated from the follow three files.
