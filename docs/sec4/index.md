@@ -16,17 +16,19 @@ $ sudo gparted
 - 1st partition : fat16, about 64-128MiB
 - 2nd partition : ext4, all of rest
 
-### 2. Prepare rootfs
-The next step is building the debian root filesystem for the FPGA board. There are two ways to achieve this: building the entire filesystem on host PC, then copy the resulting files to the MicroSD, or mount the MicroSD and build the filesystem directly on the MicroSD. The latter is considerably slower than the former.
+Pay attention to your MicroSD location (`/dev/sdX`) with X denoting your MicroSD location. Be careful not to use another drive.
 
-To achieve this, we will create a new chroot-ed directory for the debootstrap to work, then set the architecture of the filesystem to ARM. QEMU will be used to run the chroot-ed ARM filesystem on your PC. As the debootstrap completes its task, we will then install and configure the system as well as compiling OpenCV. The OpenCV compilation might take few hours depending on your PC.
+### 2. Prepare rootfs
+The next step is building the debian root filesystem for the FPGA board. There are two ways to achieve this: building the entire filesystem on host PC, then copy the resulting files to the MicroSD, or mount the MicroSD and build the filesystem directly on the MicroSD. The latter is considerably slower than the former. As a third option, we can use the provided script to streamline the building process for your convenience.
+
+To achieve this, we will create a new chroot-ed directory for the debootstrap to work, then set the architecture of the filesystem to ARM. QEMU will be used to run the chroot-ed ARM filesystem on your PC. As the debootstrap completes its task, we will then install and configure the system as well as compiling OpenCV. The OpenCV compilation might take few hours depending on your PC. 
 
 
 #### Building rootfs directly on the MicroSD
 
 ```
 # install Ubuntu 18.04 LTS and neessary packages
-$ sudo mount /dev/<YOUR SD #2> /mnt # ex. /dev/sdd2
+$ sudo mount /dev/<YOUR SD #2 partition> /mnt # ex. /dev/sdd2
 $ sudo debootstrap --foreign --arch armhf bionic /mnt http://ports.ubuntu.com/
 $ sudo apt install qemu-user-static
 $ sudo cp /usr/bin/qemu-arm-static /mnt/usr/bin/
@@ -155,13 +157,30 @@ root@ubuntu:# cd /root
 root@ubuntu:# git clone https://github.com/lwfinger/rtl8188eu.git
 root@ubuntu:# exit
 I have no name!@ubuntu:# exit
-$ sudo mount /dev/<YOUR SD #2> /mnt # ex. /dev/sdd2
+$ sudo mount /dev/<YOUR SD #2 partition> /mnt # ex. /dev/sdd2
 $ cd $WORKDIR
 $ sudo tar cpvf - * | sudo tar xpvf - -C /mnt
 $ sync; sync; sync
 $ sudo umount /mnt
 $ sudo eject /dev/<YOUR SD> /mnt # ex. /dev/sdd
 ```
+
+
+#### Building rootfs on your host PC with the script and  copy the files to MicroSD
+Run the following script then copy the generated files to the MicroSD card. The script will generate the MicroSD image on the top most directory of this repository.
+
+```
+$ cd <ROOT OF THIS REPOSITORY>/zybo/vivado/script
+$ export AD_REFKIT_SAMPLE_SCRIPT_PATH=$(pwd)
+$ sh build_rootfs.sh
+$ sudo mount /dev/<YOUR SD #2 partition> /mnt # ex. /dev/sdd2
+$ cd $WORKDIR
+$ sudo tar cpvf - * | sudo tar xpvf - -C /mnt
+$ sync; sync; sync
+$ sudo umount /mnt
+$ sudo eject /dev/<YOUR SD> /mnt # ex. /dev/sdd
+```
+
 
 ### 3. Prepare bootfs
 Copy the following five files into bootfs i.e. 1st partition.

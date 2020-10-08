@@ -24,3 +24,9 @@ $ cp arch/arm/boot/uImage <ROOT OF THIS REPOSITORY>/zybo/BOOT_FS
 $ cp arch/arm/boot/dts/zynq-zybo-z7.dtb <ROOT OF THIS REPOSITORY>/zybo/BOOT_FS
 $ cp ../linux-*.deb <ROOT OF THIS REPOSITORY>/zybo/ROOT_FS/package
 ```
+A shell script to automate this process is provided for your convenience. Install the requirements then run the provided script. Make sure `AD_REFKIT_SAMPLE_SCRIPT_PATH` is set as instructed in the previous step.
+``` sh
+$ sudo apt install build-essential ccache bc bison flex ncurses-dev git u-boot-tools gcc-arm*
+$ sh build_linux.sh
+```
+ 
