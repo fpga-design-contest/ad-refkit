@@ -72,8 +72,8 @@ DHCP=ipv4" >> /etc/systemd/network/eth0.network
 
 	exit
 EOT
-        sudo cp linux/linux-xlnx-v2020.1-zybo-z7/arch/arm/boot/uImage $AD_REFKIT_ROOT/zybo/BOOT_FS
-        cp linux/linux-xlnx-v2020.1-zybo-z7/arch/arm/boot/dts/zynq-zybo-z7.dtb $AD_REFKIT_ROOT/zybo/BOOT_FS
+        sudo cp $WORKDIR/root/linux/linux-xlnx-v2020.1-zybo-z7/arch/arm/boot/uImage $AD_REFKIT_ROOT/zybo/BOOT_FS
+        sudo cp $WORKDIR/root/linux/linux-xlnx-v2020.1-zybo-z7/arch/arm/boot/dts/zynq-zybo-z7.dtb $AD_REFKIT_ROOT/zybo/BOOT_FS
 	
  
 else
