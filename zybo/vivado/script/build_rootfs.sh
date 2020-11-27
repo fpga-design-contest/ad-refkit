@@ -31,7 +31,7 @@ then
 	sed -i -e 's/#PasswordAuthentication/PasswordAuthentication/g' /etc/ssh/sshd_config
 	sed -i -e 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
 	sed -i -e 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
-	echo 'server ntp1.jst.mfeed.ad.jp iburst' >> /etc/ntp.conf 
+	echo 'pool 0.jp.pool.ntp.org iburst' >> /etc/ntp.conf 
 	systemctl enable chrony
 	echo "[Match]
 Name=eth0
@@ -63,8 +63,16 @@ DHCP=ipv4" >> /etc/systemd/network/eth0.network
 	apt install -y wireless-tools rfkill wpasupplicant linux-firmware libssl-dev usbutils
 	cd /root
 	git clone https://github.com/lwfinger/rtl8188eu.git
+	echo "root:ad-refkit" | chpasswd
+	NEW_HOSTNAME="ad-refkit"
+	CUR_HOSTNAME=$(hostname)
+	hostnamectl set-hostname $NEW_HOSTNAME
+	hostname $NEW_HOSTNAME
+	sed -i "s/$CUR_HOSTNAME/$NEW_HOSTNAME/g" /etc/hosts
+	sed -i "s/$CUR_HOSTNAME/$NEW_HOSTNAME/g" /etc/hostname
 	exit
 EOT
+	
  
 else
     echo "Please set environment value like this."

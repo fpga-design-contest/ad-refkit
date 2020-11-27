@@ -12,6 +12,10 @@ then
 	git checkout -b linux-xlnx-v2019.1-zybo-z7 refs/tags/xilinx-v2019.1
 	sed -i -e 's|bootargs = ""|bootargs = "console=ttyPS0,115200 root=/dev/mmcblk0p2 rw earlyprintk rootfstype=ext4 rootwait devtmpfs.mount=1 uio_pdrv_genirq.of_id=generic-uio earlycon"|g' arch/arm/boot/dts/zynq-zybo-z7.dts
 	patch -p1 < $AD_REFKIT_ROOT/assets/patch/linux-xlnx-v2019.1-zybo-z7-builddeb.diff
+	git add --update
+	git commit -m "update dts for zybo-z7"
+	git tag -a xilinx-v2020.1-zybo-z7-3 -m "release xilinx-v2020.1-zybo-z7-3"
+	echo 3 > .version
 	make xilinx_zynq_defconfig ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf-
 	patch -p0 < $AD_REFKIT_ROOT/assets/patch/dot.config.patch
 	ccache make -j$(nproc) deb-pkg ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- DTC_FLAGS=--symbols
