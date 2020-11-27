@@ -6,8 +6,7 @@
 if [ -n "$AD_REFKIT_SAMPLE_SCRIPT_PATH" ];
 then
     cd $AD_REFKIT_SAMPLE_SCRIPT_PATH/../../..
-
-
+    AD_REFKIT_ROOT=$(pwd)
 	mkdir microsd; cd microsd
 	export WORKDIR=$(pwd)
 	sudo qemu-debootstrap --foreign --arch armhf bionic $WORKDIR http://ports.ubuntu.com/ 
