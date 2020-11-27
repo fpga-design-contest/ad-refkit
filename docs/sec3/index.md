@@ -29,4 +29,4 @@ A shell script to automate this process is provided for your convenience. Instal
 $ sudo apt install build-essential ccache bc bison flex ncurses-dev git u-boot-tools gcc-arm*
 $ sh build_linux.sh
 ```
- 
+For the experimental Vivado 2020.1 support, you can skip this process as the Linux build process is integrated into the ROOT FS build flow.
