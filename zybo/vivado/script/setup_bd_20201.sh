@@ -12,8 +12,7 @@ then
     env SWT_GTK3=0 vivado -mode batch -source $AD_REFKIT_SAMPLE_SCRIPT_PATH/create_prj_20201.tcl
     env SWT_GTK3=0 vivado -mode batch -source $AD_REFKIT_SAMPLE_SCRIPT_PATH/export_xsa.tcl
     cd $AD_REFKIT_SAMPLE_SCRIPT_PATH
-    chmod u+x fpga-bit2bin.py
-    sh create_bitstream_bin.sh
+    sh create_bitstream_bin_20201.sh
     xsct $AD_REFKIT_SAMPLE_SCRIPT_PATH/create_bsp_vitis.tcl
     cp -R $AD_REFKIT_SAMPLE_SCRIPT_PATH/../prj/ad_refkit/ad_refkit.sdk/ad_refkit/ps7_cortexa9_0/standalone_domain/bsp/ps7_cortexa9_0 \
           $AD_REFKIT_SAMPLE_SCRIPT_PATH/../../ROOT_FS/zynq_bsp/
