@@ -195,7 +195,7 @@ $ sudo umount /mnt
 $ sudo eject /dev/<YOUR SD> /mnt # ex. /dev/sdd
 
 ```
-This process will also build the linux kernel and prepare the BOOT FS partition. 
+This process will also build the linux kernel and prepare the BOOT FS partition. This experimental build is very sensitive to the gcc version matching between the one installed on the HOST PC and on the ZYBO image among other things. The instalation of kernel driver for the camera, wifi and others on the next section may fail. 
 Proceed to copy all the generated files in the BOOT_FS folder into the first partition as described below.
 
 ### 3. Prepare bootfs
