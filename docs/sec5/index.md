@@ -105,14 +105,16 @@ You can make a setup of WiFi connection by the following instructions.
 
 The WiFi modules work well are Buffalo WLI-UC-GNM, PLANEX GW-USValue-EZ, TP-Link TL-WN725N, and Elecom WDC-150SU2MBK.
 
-### Beforer running applictions
+### Before running applictions
 
-Then execute `init.sh`.
+Execute `init.sh`.
 Executing this script is necessary every time before running ad-refkit applications.
 
 ``` sh
 $ sh init.sh
 ```
+For Experimantal Vivado 2020.1 support, please execute init20201.sh instead.
+
 
 ### ad-sample
 
