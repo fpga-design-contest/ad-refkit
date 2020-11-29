@@ -49,8 +49,8 @@ int main (int argc, char *argv[]) {
     namedWindow("corner");
     for(int i = 0; i < num_img; i++) {
         auto found = findChessboardCorners(src_image[i], BOARD_SIZE, imageCorners);
-        cvtColor(src_image[i], gray_image, CV_BGR2GRAY);
-        cornerSubPix(gray_image, imageCorners, Size(9, 9), Size(1, -1), TermCriteria(CV_TERMCRIT_ITER + CV_TERMCRIT_EPS, 30, 0.1));
+        cvtColor(src_image[i], gray_image, cv::COLOR_BGR2GRAY);
+        cornerSubPix(gray_image, imageCorners, Size(9, 9), Size(1, -1), TermCriteria(cv::TermCriteria::MAX_ITER + cv::TermCriteria::EPS, 30, 0.1));
         if(found) {
             imagePoints.push_back(imageCorners);
         }
