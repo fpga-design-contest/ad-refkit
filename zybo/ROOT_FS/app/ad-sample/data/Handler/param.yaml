@@ -1,6 +1,6 @@
 %YAML 1.2
 ---
-BirdEyeImgRatio: 0.0002090909090909091 # 路面の俯瞰画像の取得倍率: 1pixあたりの大きさ(m)
+BirdEyeImgRatio: 0.00084 # 路面の俯瞰画像の取得倍率: 1pixあたりの大きさ(m)
 
 ExecutePeriod:
    wo_calculating:  0.001
