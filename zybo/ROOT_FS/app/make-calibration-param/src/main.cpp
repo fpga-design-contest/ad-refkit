@@ -40,6 +40,7 @@ int main (int argc, char *argv[]) {
     for(int i = 0;i < num_img;i++) {
         src_image[i] = imread(impath + "img" + to_string(i) + ".png");
     }
+    cout << "loading images completed" << endl;
 
     vector<vector<Point2f>> imagePoints;
     vector<Point2f>         imageCorners;
@@ -48,7 +49,10 @@ int main (int argc, char *argv[]) {
 
     namedWindow("corner");
     for(int i = 0; i < num_img; i++) {
+        cout << "findChessboardCorners: " << i << endl;
         auto found = findChessboardCorners(src_image[i], BOARD_SIZE, imageCorners);
+        cout << imageCorners << endl;
+        if(found == 0){ cout << "skip" << endl; continue;}
         cvtColor(src_image[i], gray_image, cv::COLOR_BGR2GRAY);
         cornerSubPix(gray_image, imageCorners, Size(9, 9), Size(1, -1), TermCriteria(cv::TermCriteria::MAX_ITER + cv::TermCriteria::EPS, 30, 0.1));
         if(found) {
@@ -68,7 +72,7 @@ int main (int argc, char *argv[]) {
             objectCorners.push_back(Point3f(i*square_size, j*square_size, 0.0f));
         }
     }
-    for(int i = 0; i < num_img; i++) {
+    for(int i = 0; i < imagePoints.size(); i++) {
         objectPoints.push_back(objectCorners);
     }
 
