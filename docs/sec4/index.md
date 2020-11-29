@@ -181,6 +181,22 @@ $ sudo umount /mnt
 $ sudo eject /dev/<YOUR SD> /mnt # ex. /dev/sdd
 ```
 
+#### Experimental build flow for Vivado 2020.1
+Similar to the last build flow, but instead of calling build_rootfs.sh script, but call build_rootfs20201.sh instead.
+```
+$ cd <ROOT OF THIS REPOSITORY>/zybo/vivado/script
+$ export AD_REFKIT_SAMPLE_SCRIPT_PATH=$(pwd)
+$ sh build_rootfs20201.sh
+$ sudo mount /dev/<YOUR SD #2 partition> /mnt # ex. /dev/sdd2
+$ cd $WORKDIR
+$ sudo tar cpvf - * | sudo tar xpvf - -C /mnt
+$ sync; sync; sync
+$ sudo umount /mnt
+$ sudo eject /dev/<YOUR SD> /mnt # ex. /dev/sdd
+
+```
+This process will also build the linux kernel and prepare the BOOT FS partition. This experimental build is very sensitive to the gcc version matching between the one installed on the HOST PC and on the ZYBO image among other things. The instalation of kernel driver for the camera, wifi and others on the next section may fail. 
+Proceed to copy all the generated files in the BOOT_FS folder into the first partition as described below.
 
 ### 3. Prepare bootfs
 Copy the following five files into bootfs i.e. 1st partition.

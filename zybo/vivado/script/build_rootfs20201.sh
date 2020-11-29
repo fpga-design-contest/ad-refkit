@@ -6,8 +6,7 @@
 if [ -n "$AD_REFKIT_SAMPLE_SCRIPT_PATH" ];
 then
     cd $AD_REFKIT_SAMPLE_SCRIPT_PATH/../../..
-
-
+    AD_REFKIT_ROOT=$(pwd)
 	mkdir microsd; cd microsd
 	export WORKDIR=$(pwd)
 	sudo qemu-debootstrap --foreign --arch armhf bionic $WORKDIR http://ports.ubuntu.com/ 
@@ -44,22 +43,6 @@ DHCP=ipv4" >> /etc/systemd/network/eth0.network
               libxvidcore-dev libx264-dev libjpeg-dev libpng-dev libtiff-dev \
               gfortran openexr libatlas-base-dev python3-dev python3-numpy \
               libtbb2 libtbb-dev libdc1394-22-dev
-	mkdir opencv_build && cd opencv_build
-	git clone --depth 1 https://github.com/opencv/opencv.git
-	git clone --depth 1 https://github.com/opencv/opencv_contrib.git
-	export OPENCV_BUILD_PATH=$(pwd)
-	cd opencv && mkdir build && cd build
-	cmake -D CMAKE_BUILD_TYPE=RELEASE \
-               -D CMAKE_INSTALL_PREFIX=/usr/local \
-               -D INSTALL_C_EXAMPLES=ON \
-               -D INSTALL_PYTHON_EXAMPLES=ON \
-               -D OPENCV_GENERATE_PKGCONFIG=ON \
-               -D OPENCV_EXTRA_MODULES_PATH=$(printenv OPENCV_BUILD_PATH)/opencv_contrib/modules \
-               -D BUILD_EXAMPLES=ON ..
-	ccache make -j$(nproc)
-	make install -j$(nproc)
-	pkg-config --modversion opencv4
-	cd ../../../ && rm -rf opencv_build
 	apt install -y wireless-tools rfkill wpasupplicant linux-firmware libssl-dev usbutils
 	cd /root
 	git clone https://github.com/lwfinger/rtl8188eu.git
@@ -70,8 +53,26 @@ DHCP=ipv4" >> /etc/systemd/network/eth0.network
 	hostname $NEW_HOSTNAME
 	sed -i "s/$CUR_HOSTNAME/$NEW_HOSTNAME/g" /etc/hosts
 	sed -i "s/$CUR_HOSTNAME/$NEW_HOSTNAME/g" /etc/hostname
+	apt install -y rsync u-boot-tools
+        mkdir linux && cd linux
+        git clone --depth 1 -b xilinx-v2020.1 https://github.com/Xilinx/linux-xlnx.git linux-xlnx-v2020.1-zybo-z7 && cd linux-xlnx-v2020.1-zybo-z7
+        git checkout -b linux-xlnx-v2020.1-zybo-z7 refs/tags/xilinx-v2020.1
+        sed -i -e 's|bootargs = ""|bootargs = "console=ttyPS0,115200 root=/dev/mmcblk0p2 rw earlyprintk rootfstype=ext4 rootwait devtmpfs.mount=1 uio_pdrv_genirq.of_id=generic-uio earlycon"|g' arch/arm/boot/dts/zynq-zybo-z7.dts
+        patch -p1 < $AD_REFKIT_ROOT/assets/patch/linux-xlnx-v2019.1-zybo-z7-builddeb.diff
+        git add --update
+        git commit -m "update dts for zybo-z7"
+        git tag -a xilinx-v2020.1-zybo-z7-5 -m "release xilinx-v2020.1-zybo-z7-5"
+        echo 5 > .version
+        make xilinx_zynq_defconfig ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf-
+        patch -p0 < $AD_REFKIT_ROOT/assets/patch/dot.config20201.patch
+        ccache make -j$(nproc) deb-pkg ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- DTC_FLAGS=--symbols
+        make uImage ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- UIMAGE_LOADADDR=0x8000
+        cp ../linux-*.deb /root/package
+
 	exit
 EOT
+        sudo cp $WORKDIR/root/linux/linux-xlnx-v2020.1-zybo-z7/arch/arm/boot/uImage $AD_REFKIT_ROOT/zybo/BOOT_FS
+        sudo cp $WORKDIR/root/linux/linux-xlnx-v2020.1-zybo-z7/arch/arm/boot/dts/zynq-zybo-z7.dtb $AD_REFKIT_ROOT/zybo/BOOT_FS
 	
  
 else

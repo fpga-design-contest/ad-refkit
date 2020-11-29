@@ -1,0 +1,36 @@
+diff -urN v4l2.orig/build/Makefile v4l2/build/Makefile
+--- v4l2.orig/build/Makefile    2020-11-27 13:40:45.800228137 +0000
++++ v4l2/build/Makefile 2020-11-26 09:42:26.113963963 +0000
+@@ -6,8 +6,8 @@
+ INCLUDE_PATH   ?= ../include
+ XLNX_SDK_DIR   ?= ../../../zynq_bsp/ps7_cortexa9_0
+ XLNX_HDR_DIR   ?= $(XLNX_SDK_DIR)/include
+-XLNX_VDMA_DIR  ?= $(XLNX_SDK_DIR)/libsrc/axivdma_v6_6/src
+-XLNX_MIPI_DIR  ?= $(XLNX_SDK_DIR)/libsrc/csi_v1_2/src
++XLNX_VDMA_DIR  ?= $(XLNX_SDK_DIR)/libsrc/axivdma_v6_7/src
++XLNX_MIPI_DIR  ?= $(XLNX_SDK_DIR)/libsrc/csi_v1_4/src
+
+ CFILES = $(SRC_PATH)/main.c\
+          $(SRC_PATH)/ioctl.c\
+diff -urN v4l2.orig/src/main.c v4l2/src/main.c
+--- v4l2.orig/src/main.c        2020-11-27 13:40:45.790228048 +0000
++++ v4l2/src/main.c     2020-11-25 13:00:37.000000000 +0000
+@@ -6,6 +6,8 @@
+ #include <linux/interrupt.h>
+ #include <linux/poll.h>
+ #include <linux/videodev2.h>
++#include <linux/slab.h>
++#include <linux/mm.h>
+ #include "zynq_v4l2.h"
+
+ MODULE_DESCRIPTION("ZYNQ v4l2 device driver");
+@@ -133,7 +135,7 @@
+     return rc;
+ }
+
+-static int zynq_v4l2_vma_fault(struct vm_fault *vmf)
++vm_fault_t zynq_v4l2_vma_fault(struct vm_fault *vmf)
+ {
+     struct page *page;
+     unsigned long offset = vmf->pgoff << PAGE_SHIFT;
+
