@@ -3,6 +3,15 @@
 This example controls motors via Web browser.
 It is assumed that host machine and ad-refkit are connected with WiFi.
 
+## Install required libraries
+
+```
+$ sudo apt install python3-pip
+$ sudo apt install python3-gevent
+$ sudo apt install python3-websocket
+$ sudo pip3 install websocket-server
+```
+
 ## Prepare
 
 ```
@@ -17,8 +26,8 @@ $ cd ..
 
 ```
 $ cd python
-$ python3 -m http.server 8080 &
-$ python3 server.py
+$ sudo python3 -m http.server 8080 &
+$ sudo python3 server.py
 ```
 
 ## Access via Web browser
