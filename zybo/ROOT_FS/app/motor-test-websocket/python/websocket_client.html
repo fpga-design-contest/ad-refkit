@@ -1,0 +1,54 @@
+<html>
+<head>
+  <script src="http://code.jquery.com/jquery-latest.min.js">
+  </script>
+  <script>
+    var ws = undefined;
+    const update_message = function(str){
+        var log = document.getElementById("txt").innerHTML;
+        log = log + "<br>" + str
+        document.getElementById("txt").innerHTML = log;
+    }
+    const stop_motor = function(){
+        update_message("stop motor");
+        if(ws != undefined){
+            ws.send("motor " + 0 + " " + 0 + " " + 0 + " " + 0 + " " + 1);
+        }
+    };
+    const update_value = function(){
+        const lvalue = document.getElementById("left_value").value;
+        const rvalue = document.getElementById("right_value").value;
+        const lang = document.getElementById("left_anguler").value;
+        const rang = document.getElementById("right_anguler").value;
+        const sec = document.getElementById("run_sec").value;
+        update_message("motor: left=" + lvalue + ", right=" + rvalue + ", left anguler=" + lang + ", right anguler=" + rang + ", sec.=" + sec);
+        if(ws != undefined){
+            ws.send("motor " + lvalue + " " + rvalue + " " + lang + " " + rang + " " + sec)
+        }
+    };
+    $(function(){
+      ws = new WebSocket("ws://192.168.11.122:9999/");
+      ws.onmessage = function(message){
+        update_message(message.data);
+      }
+    })
+  </script>
+</head>
+
+<body>
+  <table>
+  <tr><td>left gain</td><td><input id = "left_value" value="10.0"></input></td></tr>
+  <tr><td>right gain</td><td><input id = "right_value" value="10.0"></input></td></tr>
+  <tr><td>left anguler</td><td><input id = "left_anguler" value="8.0"></input></td></tr>
+  <tr><td>right anguler</td><td><input id = "right_anguler" value="8.0"></input></td></tr>
+  <tr><td>sec.</td><td><input id = "run_sec" value="5"></input></td></tr>
+  </table>
+  <input type="button" value="start" onclick="update_value()">
+  <br>
+  <!--<input type="button" value="stop" onclick="stop_motor()">-->
+  <br>
+  message: <br>
+  <div id = "txt"></div>
+</body>
+
+</html>
