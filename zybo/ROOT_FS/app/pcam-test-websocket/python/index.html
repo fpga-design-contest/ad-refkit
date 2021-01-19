@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <script>
+      var pcam_ws = undefined;
+      
+      function on_load(){
+         ws_url =
+         pcam_ws = new WebSocket("ws://" + location.hostname + ":9998");
+         pcam_ws.binaryType = 'arraybuffer';
+      
+         pcam_ws.onmessage = function(data) {
+           var img_recv = new Uint8Array(data.data);
+           var img_base64 = ""
+           for (var i = 0; i < img_recv.length; i++) {
+               img_base64 += String.fromCharCode(img_recv[i]);
+           }
+      
+           var image_canvas = document.getElementById('image_canvas');
+           var ctx = image_canvas.getContext('2d');
+           var img = new Image();
+           img.onload = function() {
+             ctx.drawImage(img, 0, 0);
+           }
+           img.src = 'data:image/png;base64,' + window.btoa(img_base64);
+         };
+      }
+  </script>
+  </head>
+  <body onload="on_load();">
+    <div>
+      <canvas id="image_canvas" width="1280" height="720"></canvas>
+    </div>
+  </body>
+</html>
