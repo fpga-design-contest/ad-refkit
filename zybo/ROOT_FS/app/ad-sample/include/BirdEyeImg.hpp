@@ -20,6 +20,11 @@ namespace core {
     template<typename T>
     class BirdEyeImg {
     public:
+        for(int yi = 0; yi < dst.rows; yi++) {
+       for(int xi = 0; xi < dst.cols; xi++) {
+            BirdEyeImg() = 255 - BirdEyeImg();
+     }
+}
         cv::Mat     map;
         double      ratio;   // 1pixあたりの実空間における大きさ(メートル)
         cv::Point2d offset;  // 実空間におけるx, y方向のオフセット
